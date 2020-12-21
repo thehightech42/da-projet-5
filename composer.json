@@ -1,0 +1,12 @@
+{
+    "name": "antoninpfistner/projet5",
+    "description": "DA PHP SYMFONY - Projet 5 - OpenClassrooms",
+    "authors": [
+        {
+            "name": "thehightech42",
+            "email": "thehightech42@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
