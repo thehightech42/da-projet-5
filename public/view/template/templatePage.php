@@ -1,7 +1,15 @@
 <?php
-
 require('header.php'); 
+require('nav.php');
 
-echo $content;
+?>
+
+<div id="content" class="<?php if( $_SERVER['REQUEST_URI'] !== '/'){echo "other_home";}?>">
+ <?= $content; ?>
+</div>
+
+<?php
+
+
 
 require('footer.php');
