@@ -33,7 +33,10 @@ if(!Maintenance(true, $ipAccepted)){}else{
     
     $router->map('GET', '/', function(){ require("view/home.php");} , 'home');
 
-    // User
+
+    /**
+     * Parti utilisateur
+     */
     $router->map('GET', '/account', function(){ require("view/account.php");}, 'account');
     $router->map('GET', '/my-account', function(){
         $userControler = new UserControler;
@@ -65,6 +68,8 @@ if(!Maintenance(true, $ipAccepted)){}else{
         htmlspecialchars($_POST['password1']), 
         htmlspecialchars($_POST['password2']));
     });
+ 
+
 
 
     if(isset($_SESSION['admin'])){

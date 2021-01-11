@@ -1,3 +1,4 @@
+/* Header - Barre de navigatetion */
 .nav_perso{
     background-color: #212529 !important;
 }
@@ -6,6 +7,20 @@
     padding-top:90px;
 }
 
-/* nav.navbar{
-    display:none;
-} */
+/* Page de contact */
+section#contactContainer{
+    height:80vh;
+}
+form#contactForm .row .col-md-6 .form-group-textarea{
+    height: 100% !important;
+}
+textarea.form-control{
+    height:100% !important;
+}
+#contactContainer .form-group{
+    margin-bottom:0;
+}
+
+#contactForm .row .col-md-6 .form-group:nth-child(2){
+    margin-top: 3rem !important;
+}

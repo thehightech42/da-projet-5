@@ -44,7 +44,7 @@ class UserModel extends Model{
     }
 
     public function addUser($pseudo, $email, $passHash){
-        $addUser = $this->_bdd->prepare("INSERT INTO user(pseudo, email, pass_hash) VALUES (:pseudo, :email, :pass_hash)"); 
+        $addUser = $this->_bdd->prepare("INSERT INTO user(pseudo, email, pass_hash, id_user_type ,account_creation_date) VALUES (:pseudo, :email, :pass_hash, 1, NOW())"); 
         $addUser->execute(array('pseudo' => $pseudo, 'email' => $email, 'pass_hash' => $passHash));
         if($addUser === false || $addUser->rowcount() !== 1 ){
             return false;

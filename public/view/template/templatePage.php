@@ -9,7 +9,7 @@ require('nav.php');
 </div>
 
 <?php
-
+    // echo $scriptPage;
 
 
 require('footer.php');

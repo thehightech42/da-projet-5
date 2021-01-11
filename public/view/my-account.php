@@ -16,28 +16,28 @@ ob_start();
             <h3>Modification des informations</h3>
             <form action="/updateUserInformation" method="POST">
                 <label for="first_name">Prénom :
-                    <input type="text" name="first_name" class="input" placeholder="Votre prénom" value="<?php 
+                    <input type="text" name="first_name" class="input form-control" placeholder="Votre prénom" value="<?php 
                         if(isset($userInformation['first_name'])){
                             echo $userInformation['first_name'];
                         }
                         ?>">
                 </label>
                 <label for="last_name">Nom :
-                    <input type="text" name="last_name" class="input" placeholder="Votre nom" value="<?php 
+                    <input type="text" name="last_name" class="input form-control" placeholder="Votre nom" value="<?php 
                         if(isset($userInformation['last_name'])){
                             echo $userInformation['last_name'];
                         }
                         ?>">
                 </label>
                 <label for="email">Email :
-                    <input type="email" name="email" class="input" placeholder="Votre email" value="<?php 
+                    <input type="email" name="email" class="input form-control" placeholder="Votre email" value="<?php 
                         if(isset($userInformation['email'])){
                             echo $userInformation['email'];
                         }
                         ?>"required>
                 </label>
                 <label for="pseudo">Pseudo :
-                    <input type="text" name="pseudo" class="input" placeholder="Votre pseudo" value="<?php 
+                    <input type="text" name="pseudo" class="input form-control" placeholder="Votre pseudo" value="<?php 
                         if(isset($userInformation['pseudo'])){
                             echo $userInformation['pseudo'];
                         }
@@ -49,15 +49,15 @@ ob_start();
         </div>
         <div class="col-lg-4">
             <h3>Changement du mot de passe</h3>
-            <form method="POST" action="/updatePassword" >
+            <form id="formUpdatePassword" method="POST" action="/updatePassword" >
                 <label for="lastPassword">Ancien mot de passe :
-                    <input type="password" name="lastPassword" class="input" placeholder="Votre ancien mot de passe">
+                    <input type="password" name="lastPassword" class="input form-control" placeholder="Votre ancien mot de passe">
                 </label>
                 <label for="password1">Votre nouveau mot de passe :
-                    <input type="password" name="password1" class="input" placeholder="Votre nouveau mot de passe">
+                    <input type="password" id="inputPassword1" name="password1" class="input form-control" placeholder="Votre nouveau mot de passe">
                 </label>
                 <label for="password2">Confirmez votre nouveau mot de passe :
-                    <input type="password" name="password2" class="input" placeholder="Confirmez votre nouveau mot de passe">
+                    <input type="password" id="inputPassword2"name="password2" class="input form-control" placeholder="Confirmez votre nouveau mot de passe">
                 </label>
                 <input type="submit" name="submit" value="Changer votre mot de passe">
             </form>
@@ -68,5 +68,11 @@ ob_start();
 <?php
 
 $content = ob_get_clean();
+
+
+ob_start();
+    ?><script src="js/ControlePassword.js"></script>
+        <script>let checkPassword = new ControlePassword(document.getElementById("formUpdatePassword"), document.getElementById("inputPassword1"), document.getElementById("inputPassword2"));</script><?php
+$scriptPage = ob_get_clean();
 
 require('template/templatePage.php');

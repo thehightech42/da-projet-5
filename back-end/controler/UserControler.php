@@ -8,10 +8,6 @@ class UserControler{
        $this->_userModel = new UserModel;
     }
 
-    static function test($test){
-        require('../public/view/home.php');
-    }
-
     public function addUser($email, $pseudo, $password1, $password2){
         $tryEmail = $this->_userModel->tryEmail($email);
         $tryPseudo = $this->_userModel->tryPseudo($pseudo);
@@ -142,4 +138,5 @@ class UserControler{
         }
         header('Location: /my-account');
     }
+
 }
