@@ -119,4 +119,14 @@ class UserModel extends Model{
         }
     }
 
+    public function selectUserType($id){
+        $selectUserType = $this->_bdd->prepare('SELECT id_user_type FROM user WHERE id = :id'); 
+        $selectUserType->execute(['id'=>$id]);
+        if($selectUserType->rowcount() !== 1 || $selectUserType === false){
+            return false;
+        }else{
+            $idUserType = $selectUserType->fetch();
+            return $idUserType['id_user_type'];
+        }
+    }
 }

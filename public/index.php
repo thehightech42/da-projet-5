@@ -84,7 +84,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
 
 
     if(isset($_SESSION['admin'])){
-        echo 'test ++';
+        // echo 'test ++';
     }
 
 

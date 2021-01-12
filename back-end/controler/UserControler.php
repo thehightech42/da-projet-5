@@ -56,10 +56,17 @@ class UserControler{
                         $userConnexionInfo = "Une erreur c'est produite lors de votre connexion. Merci de contacter l'administrateur.";
                         require('view/account.php');
                     }else{
-                        $_SESSION['pseudo'] = $pseudo;
-                        $_SESSION['id'] = $findId;
-                        $_SESSION['email'] = $findEmail['email'];
-                        header('Location: /', TRUE);
+                        $userType = $this->_userModel->selectUserType($findId);
+                        if($userType === false){
+                            $userConnexionInfo = "Une erreur c'est produite lors de votre connexion. Merci de contacter l'administrateur.";
+                            require('view/account.php');
+                        }else{
+                            $_SESSION['pseudo'] = $pseudo;
+                            $_SESSION['id'] = $findId;
+                            $_SESSION['email'] = $findEmail['email'];
+                            $_SESSION['admin'] = $userType;
+                            header('Location: /', TRUE);
+                        }
                     }
                 }else{
                     $userConnexionInfo = "Votre mot de passe est incorret";
