@@ -139,4 +139,42 @@ class UserControler{
         header('Location: /my-account');
     }
 
+    public function contact(){
+        require('view/contact.php');
+    }
+
+    public function sendMailContact($name, $email, $content){
+        $contenu = 
+        "<html>
+            <head>
+
+            </head>
+            <body>
+                <h2>Nom :</h2>
+                <p>". $name ."</p>
+                <hr>
+                <h2>Email du contact :</h2>
+                <p>". $email."</p>
+                <hr>
+                <h2>Contenu</h2>
+                <p>". $content ."</p>
+            </body>
+        </html>";
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+        $headers .= 'From: ' . $email . "\r\n";
+
+        $mail = mail('contact@antoninpfistner.fr', "Message du site projet-5.antoninpfistner.fr", $contenu, $headers );
+        if($mail){
+            $_SESSION['infoContact'] = "Votre message à bien été envoyé !";
+        }else{
+            $_SESSION['infoContactUser']['name'] = $name;
+            $_SESSION['infoContactUser']['email'] = $email;
+            $_SESSION['infoContactUser']['content'] = $content;
+            $_SESSION['infoContact'] = error_get_last()['message'];
+
+        }
+        $this->contact();
+    }
+
 }

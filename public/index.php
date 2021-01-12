@@ -68,6 +68,17 @@ if(!Maintenance(true, $ipAccepted)){}else{
         htmlspecialchars($_POST['password1']), 
         htmlspecialchars($_POST['password2']));
     });
+    //Contact
+    $router->map('GET', '/contact', function(){
+    $userControler = new UserControler;
+    $userControler->contact();
+    }, 'contact');
+    $router->map('POST', '/sendMailContact', function(){
+        $userControler = new UserControler;
+        $userControler->sendMailContact( htmlspecialchars($_POST['first&last_name']),
+        htmlspecialchars($_POST['contact_email']),
+        htmlspecialchars($_POST['content_message']));
+    });
  
 
 
