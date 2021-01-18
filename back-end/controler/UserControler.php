@@ -62,7 +62,7 @@ class UserControler{
                             require('view/account.php');
                         }else{
                             $_SESSION['pseudo'] = $pseudo;
-                            $_SESSION['id'] = $findId;
+                            $_SESSION['id_user'] = $findId;
                             $_SESSION['email'] = $findEmail['email'];
                             $_SESSION['admin'] = $userType;
                             header('Location: /', TRUE);

@@ -9,8 +9,25 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Articles</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/posts">Articles</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Projets</a></li>
+                        <?php
+                        if(isset($_SESSION['admin']) && $_SESSION['admin'] === "3"){
+                            ?>
+                            <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administration
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/createPost">Crée un article</a>
+                                    <a class="dropdown-item" href="#">Modération des commentaires</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="/logOut">Administration</a>
+                                    </div>
+                                </li>
+                            <?php
+                        }
+                        ?>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/contact">Contact</a></li>
                         <?php
                             if(isset($_SESSION['pseudo'])){
@@ -37,21 +54,3 @@
                 </div>
             </div>
         </nav>
-
-    <!-- <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="/my-account" href="#">Mon Compte
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="/my-account">Paramètre de mon compte</a></li>
-          <li><a href="/logOut">Deconnexion</a></li>
-        </ul>
-    </li> -->
-
-    <!-- <li class="nav-item dropdown">
-        <a class="dropdown-toggle" data-toggle="/my-account" href="#">Mon Compte
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li><a href="/my-account">Paramètre de mon compte</a></li>
-            <li><a href="/logOut">Deconnexion</a></li>
-        </ul>
-    </li> -->

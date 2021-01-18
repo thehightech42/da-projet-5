@@ -1,6 +1,7 @@
 /* Header - Barre de navigatetion */
 .nav_perso{
     background-color: #212529 !important;
+    /* display: none; */
 }
 
 #content.other_home{
