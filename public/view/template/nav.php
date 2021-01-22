@@ -20,9 +20,9 @@
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/createPost">Crée un article</a>
-                                    <a class="dropdown-item" href="#">Modération des commentaires</a>
+                                    <a class="dropdown-item" href="/commentModeration">Modération des commentaires</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/logOut">Administration</a>
+                                    <a class="dropdown-item" href="/administration">Administration</a>
                                     </div>
                                 </li>
                             <?php

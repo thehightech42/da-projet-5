@@ -67,6 +67,8 @@ if(!Maintenance(true, $ipAccepted)){}else{
         htmlspecialchars($_POST['password1']), 
         htmlspecialchars($_POST['password2']));
     });
+
+
     //Contact
     $router->map('GET', '/contact', function(){
     $userControler = new UserControler;
@@ -79,36 +81,57 @@ if(!Maintenance(true, $ipAccepted)){}else{
         htmlspecialchars($_POST['content_message']));
     });
 
+
     // Blog
-    $router->map('GET', '/posts', function(){
+    $router->map('GET', '/posts', function(){ // Listing des articles
         $userControler = new PostControler; 
         $userControler->postsList();
     }); 
-    $router->map('GET', '/post/[i:id]', function($id){
-        $postControler = new PostControler; 
-        $postControler->post($id); 
+    $router->map('GET', '/post/[i:id]', function($id){ // Affuchage d'un article
+        $postControler = new PostControler;
+        if(isset($_SESSION['info'])){
+            $elements['info'] = $_SESSION['info'];
+            unset($_SESSION['info']);
+            $postControler->post($id, $elements); 
+        }else{
+            $postControler->post($id); 
+        }
+        
     });
+    $router->map('POST', '/insertComment/[i:id]', function($id){ // Insertion d'un commentaire
+        $postControler = new PostControler();
+        $elements['idPost'] = $id; 
+        $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
+        $elements['comment'] = htmlspecialchars($_POST['comment']);
+        if(isset($_POST['email'])){
+            $elements['email'] = htmlspecialchars($_POST['email']);
+        }
+        $postControler->insertComment($elements);
+    });
+
+
 
     if(isset($_SESSION['admin']) && $_SESSION['admin'] === "3"){
         //Zone Blog Post admin  
         $router->map('GET', '/createPost', function(){
-            $postControler = new PostControler;
+            $postControler = new PostControler; // Page de création d'un article
             $postControler->createPost();
         });
 
-        $router->map('POST', '/insertPost', function(){
+        $router->map('POST', '/insertPost', function(){ // Insertion d'un article
             $postControler = new PostControler;
             $statusPost = true;
             if( isset($_POST['draft']) ){ //Obligation de laisser cette condition pour savoir si l'article doit être un brouillon ou pas. Utilisation de isset pour savoir. 
                 $statusPost = false;
             };
-            $postControler->insertPost(htmlspecialchars($_POST['titlePost']), 
-            htmlspecialchars($_POST['shortDescription']),
-            $_POST['content'], 
-            $statusPost
-            );
+            $elements['titlePost'] = htmlspecialchars($_POST['titlePost']);
+            $elements['shortDesciptions'] = htmlspecialchars($_POST['shortDescription']);
+            $elements['content'] = $_POST['content'];
+            $elements['statusPost'] = $statusPost;
+
+            $postControler->insertPost($elements);
         });
-        $router->map('GET', '/updatePost/[i:id]', function($id){
+        $router->map('GET', '/updatePost/[i:id]', function($id){ // Page update d'un article
             $postControler = new PostControler;
             $elements['id'] = $id;
             if(isset($_SESSION['info'])){
@@ -127,7 +150,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
                 $postControler->updatePost($elements);
             }
         });
-        $router->map('POST', '/insertUpdatePost', function(){
+        $router->map('POST', '/insertUpdatePost', function(){ // Insertion de l'update d'un article
             $postControler = new PostControler;
             $statusPost = true;
             if( isset($_POST['draft']) ){ //Obligation de laisser cette condition pour savoir si l'article doit être un brouillon ou pas. Utilisation de isset pour savoir. 
@@ -136,14 +159,33 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $postControler->insertUpdatePost(htmlspecialchars($_POST['titlePost']), htmlspecialchars($_POST['shortDescription']), $_POST['content'], $_POST['id_post'], $statusPost);
         });
 
-    } //End admin
+        $router->map('GET', '/commentModeration', function(){
+            $postControler = new PostControler; 
+            if(isset($_SESSION['info'])){
+                $elements['infoModification'] = $_SESSION['info'];
+                unset($_SESSION['info']);
+                $postControler->commentModeration($elements);
+            }else{
+                $postControler->commentModeration();
+            }
+            
+        });
+
+        $router->map('GET', '/removeComment/[i:id]', function($id){
+            $postControler = new PostControler;
+            $postControler->removeComment($id);
+        });
+
+        $router->map('GET', '/validComment/[i:id]', function($id){
+            $postControler = new PostControler;
+            $postControler->checkComment($id);
+        });
+
+    } 
+    //End admin
 
 
     $match = $router->match();
-    // var_dump($_POST);
-    // var_dump($match);
-    // var_dump($routes);
-
     if( is_array($match) && is_callable( $match['target']) ) {
         call_user_func_array( $match['target'], $match['params'] ); 
     } else {

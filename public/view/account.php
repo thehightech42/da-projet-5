@@ -9,28 +9,24 @@ ob_start();
             <h3>Inscription :</h3>
         </div>
         <form method="POST" action="/addUser" id="formUpdatePassword">
-            <div class="col-lg-10 offset-lg-1">
-                <label for="pseudo">Votre pseudo :
-                    <input type="text" name="pseudo" class="input form-control" placeholder="Votre pseudo " value="<?php if(isset($_SESSION['graspedUserInfo']['pseudo'])){echo $_SESSION['graspedUserInfo']['pseudo']; }?>" required>
-                </label>
+            <div class="col-lg-10 offset-lg-1 form-group">
+                <label for="pseudo">Votre pseudo :</label>
+                <input type="text" name="pseudo" class="input form-control" placeholder="Votre pseudo " value="<?php if(isset($_SESSION['graspedUserInfo']['pseudo'])){echo $_SESSION['graspedUserInfo']['pseudo']; }?>" required>
             </div>
-            <div class="col-lg-10 offset-lg-1">
-                <label for="email">Votre email :
-                    <input type="email" name="email" class="input form-control" placeholder="Votre email" value="<?php if(isset($_SESSION['graspedUserInfo']['email'])){echo $_SESSION['graspedUserInfo']['email']; }?>" required>
-                </label>
+            <div class="col-lg-10 offset-lg-1 form-group">
+                <label for="email">Votre email :</label>
+                <input type="email" name="email" class="input form-control" placeholder="Votre email" value="<?php if(isset($_SESSION['graspedUserInfo']['email'])){echo $_SESSION['graspedUserInfo']['email']; }?>" required>
             </div>
-            <div class="col-lg-10 offset-lg-1">
-                <label for="password1">Votre mot de passe :
-                    <input type="password" name="password1" id="inputPassword1" class="input form-control" placeholder="Votre mot de passe">
-                </label>
+            <div class="col-lg-10 offset-lg-1 form-group">
+                <label for="password1">Votre mot de passe :</label>
+                <input type="password" name="password1" id="inputPassword1" class="input form-control" placeholder="Votre mot de passe">
             </div>
-            <div class="col-lg-10 offset-lg-1">
-                <label for="password2">Confirmez mot de passe :
-                    <input type="password" name="password2" id="inputPassword2" class="input form-control" placeholder="Confirmez mot de passe">
-                </label>
+            <div class="col-lg-10 offset-lg-1 form-group">
+                <label for="password2">Confirmez mot de passe :</label>
+                <input type="password" name="password2" id="inputPassword2" class="input form-control" placeholder="Confirmez mot de passe">
             </div>
-            <div class="col-lg-10 offset-lg-1">
-                <input type="submit" name="submit" value="S'inscrire">
+            <div class="col-lg-10 offset-lg-1 form-group">
+                <input type="submit" class="btn btn-dark" name="submit" value="S'inscrire">
             </div>
         </form>
         <?php
@@ -48,18 +44,16 @@ ob_start();
             <h3>Connexion :</h3>
         </div>
         <form method="POST" action="/logIn">
-            <div class="col-lg-10 offset-lg-1">
-                <label for="pseudo">Votre pseudo :
-                    <input type="text" name="pseudo" class="input form-control" placeholder="Votre pseudo">
-                </label>
+            <div class="col-lg-10 offset-lg-1 form-group">
+                <label for="pseudo">Votre pseudo :</label>
+                <input type="text" name="pseudo" class="input form-control" placeholder="Votre pseudo">
+            </div>
+            <div class="col-lg-10 offset-lg-1 form-group">
+                <label for="password">Votre mot de passe :</label>
+                <input type="password" name="password" class="input form-control" placeholder="Votre mot de passe">
             </div>
             <div class="col-lg-10 offset-lg-1">
-                <label for="password">Votre mot de passe :
-                    <input type="password" name="password" class="input form-control" placeholder="Votre mot de passe">
-                </label>
-            </div>
-            <div class="col-lg-10 offset-lg-1">
-                <input type="submit" name="submit" value="Connexion">
+                <input type="submit" class="btn btn-dark" name="submit" value="Connexion">
             </div>
         </form>
         <?php

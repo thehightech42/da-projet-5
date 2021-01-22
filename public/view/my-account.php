@@ -47,7 +47,7 @@ ob_start();
                         }
                     ?>" required>
                 </div>
-                <input type="submit" name="submit" value="Enregistrer les modifications">
+                <input type="submit" class="btn btn-dark" name="submit" value="Enregistrer les modifications">
             </form>
             <p><?php if(isset($_SESSION['infoUserUpdate']) && $_SESSION['infoUserUpdate'] !== false ){echo $_SESSION['infoUserUpdate'];}; unset($_SESSION['infoUserUpdate'])?></p>
         </div>
@@ -67,7 +67,7 @@ ob_start();
                     <input type="password" id="inputPassword2"name="password2" class="input form-control" placeholder="Confirmez votre nouveau mot de passe">
                 </div>
 
-                <input type="submit" name="submit" value="Changer votre mot de passe">
+                <input type="submit" class="btn btn-dark" name="submit" value="Changer votre mot de passe">
             </form>
                 <?php if(isset($_SESSION['userPasswordInfo'])){echo $_SESSION['userPasswordInfo']; unset($_SESSION['userPasswordInfo']);}?>
         </div>

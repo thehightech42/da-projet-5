@@ -88,6 +88,17 @@ class UserModel extends Model{
         }
     }
 
+    public function selectUserInfoWithId($id){
+        $selectUserInfo = $this->_bdd->prepare('SELECT first_name, last_name, email, pseudo FROM user WHERE id = :id'); 
+        $selectUserInfo->execute(['id'=>$id]); 
+        if($selectUserInfo->rowcount() !== 1 || $selectUserInfo === false){
+            return false;
+        }else{
+            $userInfo = $selectUserInfo->fetch();
+            return $userInfo;
+        }
+    }
+
     public function selectEmail($id){
         $selectEmail = $this->_bdd->prepare('SELECT email FROM user WHERE id = :id'); 
         $selectEmail->execute(['id'=>$id]); 
