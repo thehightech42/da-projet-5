@@ -87,7 +87,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
         $userControler = new PostControler; 
         $userControler->postsList();
     }); 
-    $router->map('GET', '/post/[i:id]', function($id){ // Affuchage d'un article
+    $router->map('GET', '/post/[i:id]', function($id){ // Affichage d'un article
         $postControler = new PostControler;
         if(isset($_SESSION['info'])){
             $elements['info'] = $_SESSION['info'];
@@ -159,7 +159,13 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $postControler->insertUpdatePost(htmlspecialchars($_POST['titlePost']), htmlspecialchars($_POST['shortDescription']), $_POST['content'], $_POST['id_post'], $statusPost);
         });
 
-        $router->map('GET', '/commentModeration', function(){
+        $router->map('GET', '/deletePost/[i:id]', function($id){
+            $postControler = new PostControler;
+            $postControler->deletePost($id);
+        });
+
+        // Zone admin des commentaires
+        $router->map('GET', '/admin/commentModeration', function(){
             $postControler = new PostControler; 
             if(isset($_SESSION['info'])){
                 $elements['infoModification'] = $_SESSION['info'];
@@ -170,7 +176,6 @@ if(!Maintenance(true, $ipAccepted)){}else{
             }
             
         });
-
         $router->map('GET', '/removeComment/[i:id]', function($id){
             $postControler = new PostControler;
             $postControler->removeComment($id);
@@ -180,6 +185,24 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $postControler = new PostControler;
             $postControler->checkComment($id);
         });
+
+        // Zone admin
+        $router->map('GET', '/admin', function(){
+            // Ma fonction pour le dashboard
+        });
+
+        $router->map('GET', '/admin/posts', function(){
+            $postControler = new PostControler;
+            if(isset($_SESSION['info'])){
+                $elements['infoModfication'] = $_SESSION['info'];
+                unset($_SESSION['info']);
+                $postControler->adminPosts($elements);
+            }
+            $postControler->adminPosts();
+        });
+
+        
+        
 
     } 
     //End admin
