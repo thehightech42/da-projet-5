@@ -22,7 +22,10 @@ input.form-control, textarea, input.form-control:focus, textarea:focus textarea.
  .nav_perso{
     background-color: #212529 !important;
     /* display: none; */
-} 
+}
+nav.navbar:not(.nav_perso){
+    background-color: rgba(0,0,0,0.3) !important;
+}
 
 /* Barre d'administration */
 #navAdmin{
@@ -82,4 +85,10 @@ footer{
 
 .yellow{
     color :#e6b301;
+}
+
+/* Dashboard Page */
+
+svg .fa-2x{
+    color:grey !important;
 }

@@ -189,3 +189,5 @@ class PostModel extends Model{
             }
       }
 }
+
+// SELECT u.pseudo, c.* FROM comment c, user u WHERE comment_status = 1 AND post_id = 8 AND c.id_user = u.pseudo
