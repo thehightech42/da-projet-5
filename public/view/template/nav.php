@@ -22,7 +22,7 @@
                                     <a class="dropdown-item" href="/createPost">Crée un article</a>
                                     <a class="dropdown-item" href="/admin/commentModeration">Modération des commentaires</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/administration">Dashboard</a>
+                                    <a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
                                     </div>
                                 </li>
                             <?php

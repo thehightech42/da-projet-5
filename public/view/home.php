@@ -12,7 +12,7 @@ if(isset($test)){
     <div class="container">
         <div class="masthead-subheading">Bienvenie Dans Mon Monde</div>
         <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Contactez - Moi !</a>
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/contact">Contactez - Moi !</a>
     </div>
 </header>
 
