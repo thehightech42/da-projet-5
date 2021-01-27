@@ -211,9 +211,6 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $postControler->adminPosts();
         });
 
-        
-        
-
     } 
     //End admin
 
@@ -222,7 +219,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
     if( is_array($match) && is_callable( $match['target']) ) {
         call_user_func_array( $match['target'], $match['params'] ); 
     } else {
-        header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+        // header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+        require('view/404.php');
     }
-
 }
