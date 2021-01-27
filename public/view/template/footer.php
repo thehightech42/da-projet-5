@@ -8,7 +8,7 @@
                         <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/antonin-p-77a47bba/"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <div class="col-lg-4 text-lg-right">
-                        <a class="mr-3" href="#!">Mentions Légales</a>
+                        <a class="mr-3" href="/mentions-legales">Mentions Légales</a>
                         <!-- <a href="#!">Terms of Use</a> -->
                     </div>
                 </div>

@@ -111,8 +111,8 @@ if(!Maintenance(true, $ipAccepted)){}else{
     });
 
     // Pages
-    $router->map('GET', 'mentions-legales', function(){
-        // Code des mentions legales
+    $router->map('GET', '/mentions-legales', function(){
+        require('view/mentions-legales.php');
     });
 
     $router->map('GET', '/projects', function(){
