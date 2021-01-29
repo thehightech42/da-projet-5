@@ -8,14 +8,14 @@ ob_start();
         <div class="col-lg-10 offset-lg-1">
             <h3>Inscription :</h3>
         </div>
-        <form method="POST" action="/addUser" id="formUpdatePassword">
+        <form method="POST" action="/user/insertUser" id="formUpdatePassword">
             <div class="col-lg-10 offset-lg-1 form-group">
                 <label for="pseudo">Votre pseudo :</label>
-                <input type="text" name="pseudo" class="input form-control" placeholder="Votre pseudo " value="<?php if(isset($_SESSION['graspedUserInfo']['pseudo'])){echo $_SESSION['graspedUserInfo']['pseudo']; }?>" required>
+                <input type="text" name="pseudo" class="input form-control" placeholder="Votre pseudo " value="<?php if(isset($elements['pseudo'])){echo $elements['pseudo']; }?>" required>
             </div>
             <div class="col-lg-10 offset-lg-1 form-group">
                 <label for="email">Votre email :</label>
-                <input type="email" name="email" class="input form-control" placeholder="Votre email" value="<?php if(isset($_SESSION['graspedUserInfo']['email'])){echo $_SESSION['graspedUserInfo']['email']; }?>" required>
+                <input type="email" name="email" class="input form-control" placeholder="Votre email" value="<?php if(isset($elements['email'])){echo $elements['email']; }?>" required>
             </div>
             <div class="col-lg-10 offset-lg-1 form-group">
                 <label for="password1">Votre mot de passe :</label>
@@ -30,12 +30,10 @@ ob_start();
             </div>
         </form>
         <?php
-            if(isset($_SESSION['addUserInfo'])){
+            if(isset($elements['info']['registration'])){
                  ?>
-                    <p> <?php echo $_SESSION['addUserInfo']; unset($_SESSION['addUserInfo']); ?></p>
+                    <p> <?php echo $elements['info']['registration']; ?></p>
                  <?php
-            }elseif(isset($_SESSION['graspedUserInfo'])){
-                unset($_SESSION['graspedUserInfo']);
             }
         ?>
     </div>
@@ -43,7 +41,7 @@ ob_start();
         <div class="col-lg-10 offset-lg-1">
             <h3>Connexion :</h3>
         </div>
-        <form method="POST" action="/logIn">
+        <form method="POST" action="/user/connection">
             <div class="col-lg-10 offset-lg-1 form-group">
                 <label for="pseudo">Votre pseudo :</label>
                 <input type="text" name="pseudo" class="input form-control" placeholder="Votre pseudo">
@@ -57,9 +55,9 @@ ob_start();
             </div>
         </form>
         <?php
-        if(isset($userConnexionInfo)){
+        if(isset($elements['info']['connection'])){
                  ?>
-                    <p> <?= $userConnexionInfo ?></p>
+                    <p> <?= $elements['info']['connection'] ?></p>
                  <?php
             }
         ?>

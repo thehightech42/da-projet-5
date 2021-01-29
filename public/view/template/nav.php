@@ -40,13 +40,13 @@
                                     <a class="dropdown-item" href="/my-account">Mes informations</a>
                                     <!-- <a class="dropdown-item" href="#">Modifi</a> -->
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/logOut">Deconnexion</a>
+                                    <a class="dropdown-item" href="/user/logOut">Deconnexion</a>
                                     </div>
                                 </li>
                                 <?php
                             }else{
                                 ?>
-                                    <li class="nav-item"><a class="nav-link" href="/account">Mon compte</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="/user/account">Mon compte</a></li>
                                 <?php
                                 }
                                 ?>

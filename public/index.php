@@ -5,6 +5,8 @@ require "../config.php";
 require "../gestionAcces.php";
 // var_dump($_SESSION);
 // var_dump($_SERVER);
+// unset($_SESSION);
+// session_destroy();
 
 use \App\controler\UserControler; 
 use \App\controler\PostControler; 
@@ -37,24 +39,46 @@ if(!Maintenance(true, $ipAccepted)){}else{
     /**
      * Parti utilisateur
      */
-    $router->map('GET', '/account', function(){ require("view/account.php");}, 'account');
-    $router->map('GET', '/my-account', function(){
+    $router->map('GET', '/user/account', function(){
+        $elements = [];
+        if(isset($_SESSION['info'])){
+            $elements['info'] = $_SESSION['info'];
+            unset($_SESSION['info']);
+        }
+        if(isset($_SESSION['email'])){
+            $elements['email'] = $_SESSION['email'];
+            unset($_SESSION['email']);
+        }
+        if(isset($_SESSION['pseudo'])){
+            $elements['pseudo'] = $_SESSION['pseudo'];
+            unset($_SESSION['pseudo']);
+        }
+        require("view/account.php");
+    }, 'account');
+
+    $router->map('GET', '/user/my-account', function(){
         $userControler = new UserControler;
         $userControler->myAccount();
     },'my-account');
-    $router->map('GET', '/logOut', function(){$userControler = new UserControler;$userControler->logOut();}, 'deconnexion');
-    $router->map('POST', '/addUser', function(){
+
+    $router->map('GET', '/user/logOut', function(){$userControler = new UserControler;$userControler->logOut();}, 'deconnexion');
+
+    $router->map('POST', '/user/insertUser', function(){
         $userControler = new UserControler;
-        $userControler->addUser(htmlspecialchars($_POST['email']),
-        htmlspecialchars($_POST['pseudo']),
-        htmlspecialchars($_POST['password1']),
-        htmlspecialchars($_POST['password2']));
+        $elements['email'] = htmlspecialchars($_POST['email']);
+        $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
+        $elements['password1'] = htmlspecialchars($_POST['password1']);
+        $elements['password2'] = htmlspecialchars($_POST['password2']);
+        $userControler->insertUser($elements);
     });
-    $router->map('POST', '/logIn', function(){
+
+    $router->map('POST', '/user/connection', function(){
         $userControler = new UserControler;
-        $userControler->logIn( htmlspecialchars($_POST['pseudo']), 
-        htmlspecialchars($_POST['password']));
+        $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
+        $elements['password'] = htmlspecialchars($_POST['password']);
+        $userControler->connection($elements);
     });
+
     $router->map('POST', '/updateUserInformation', function(){
         $userControler = new UserControler;
         $userControler->updateUserInformation( htmlspecialchars($_POST['first_name']), 
@@ -62,6 +86,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
         htmlspecialchars($_POST['email']),
         htmlspecialchars($_POST['pseudo']));
     });
+
     $router->map('POST','/updatePassword', function(){
         $userControler = new UserControler;
         $userControler->updatePassword( htmlspecialchars($_POST['lastPassword']),

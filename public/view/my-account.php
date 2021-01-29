@@ -11,9 +11,9 @@ ob_start();
         </div>
     </div>
 
-    <div class="row justify-content-around  mt-3">
+    <div class="row justify-content-around  mt-5">
         <div class="col-lg-4">
-            <h3>Modification des informations</h3>
+            <h5>Modification des informations</h5>
             <form action="/updateUserInformation" method="POST">
                 <div class="form-group">
                     <label for="first_name">Prénom :</label>
@@ -52,7 +52,7 @@ ob_start();
             <p><?php if(isset($_SESSION['infoUserUpdate']) && $_SESSION['infoUserUpdate'] !== false ){echo $_SESSION['infoUserUpdate'];}; unset($_SESSION['infoUserUpdate'])?></p>
         </div>
         <div class="col-lg-4">
-            <h3>Changement du mot de passe</h3>
+            <h5>Changement du mot de passe</h5>
             <form id="formUpdatePassword" method="POST" action="/updatePassword" >
                 <div class="form-group">
                     <label for="lastPassword">Ancien mot de passe :</label>

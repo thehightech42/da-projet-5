@@ -106,7 +106,7 @@ class UserModel extends Model{
             return false;
         }else{
             $email = $selectEmail->fetch(); 
-            return $email;
+            return $email['email'];
         }
     }
 
