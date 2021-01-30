@@ -42,48 +42,39 @@ class UserControler{
         $findId = $this->_userModel->findIdWithPseudo($elements['pseudo']);
         $infoCo = "";
         if($findId === false){
-            $_SESSION['info']['connection'] = "Votre pseudo n'a pas été trouvé.";
-            // echo ('TEST1');
+            $_SESSION['info']['connection'] = "Votre pseudo n'a pas été trouvé.";  
             header('Location: /user/account', TRUE);
         }else{
             $findPassword = $this->_userModel->selectPasswordHash($findId);
             if($findPassword === false){
                 $_SESSION['info']['connection'] = "Une erreur c'est produite. Merci de contacter l'administrateur.";
-                // echo ('TEST2');
                 header('Location: /user/account', TRUE);
             }else{
                 $checkPassword = password_verify($elements['password'], $findPassword);
                 if($checkPassword === false){
                     $_SESSION['info']['connection'] = "Votre mot de passe ne correspond pas.";
-                    // echo ('TEST3');
                     header('Location: /user/account', TRUE);
                 }else{
                     $findEmail = $this->_userModel->selectEmail($findId);
                     if($findEmail === false){
                         $_SESSION['info']['connection'] = "Une erreur c'est produite. Merci de contacter l'administrateur.";  
-                        // echo ('TEST4');
                         header('Location: /user/account', TRUE);  
                     }else{
                         $userType = $this->_userModel->selectUserType($findId);
                         if($userType === false){
                             $_SESSION['info']['connection'] = "Une erreur c'est produite. Merci de contacter l'administrateur.";
-                            // echo ('TEST5');
                             header('Location: /user/account', TRUE);
                         }else{
                             $_SESSION['pseudo'] = $elements['pseudo'];
                             $_SESSION['id_user'] = $findId;
                             $_SESSION['email'] = $findEmail;
                             $_SESSION['admin'] = $userType;
-                            // echo ('TEST6');
-                            
                             header('Location: /user/my-account', TRUE);
                         }
                     }
                 }
             }
         }
-        // $_SESSION['info']['connection'] = $infoCo;
-        // header('Location: /account', TRUE);
     }
 
     public function logOut(){
@@ -92,68 +83,75 @@ class UserControler{
         header('Location: /');
     }
 
-    public function myAccount(){
-        $userInformation = $this->_userModel->selectUserInfo();
-        if($userInformation === false){
-            $_SESSION['infoUserUpdate'] = "Une erreur c'est produite dans le chargement de vos informations. Merci de contacter l'administrateur du site.";
+    public function myAccount($info = null){
+        $elementsGet = $this->_userModel->selectUserInfo();
+        if($elementsGet === false){
+            $elements['info']['userGet'] = "Une erreur c'est produite dans le chargement de vos informations. Merci de contacter l'administrateur du site.";
+        }else{
+            $elements['email'] = $elementsGet['email'];
+            $elements['pseudo'] = $elementsGet['pseudo'];
+            $elements['first_name'] = $elementsGet['first_name'];
+            $elements['last_name'] = $elementsGet['last_name'];
         }
+        $elements['info'] = $info;
         require('view/my-account.php');
     }
 
-    public function updateUserInformation($first_name, $last_name, $email, $pseudo){
-        $arrayCheckUniqueInformation = $this->checkUniqueInformation($pseudo, $email);
-        $_SESSION['infoUserUpdate'] = false;
+    public function updateUserInformation($elements){
+        echo "Test1";
+        $arrayCheckUniqueInformation = $this->checkUniqueInformation($elements['pseudo'], $elements['email']);
         if($arrayCheckUniqueInformation['pseudo'] && $arrayCheckUniqueInformation['email']){
-            $updateUserInformation = $this->_userModel->updateUserInformation($first_name, $last_name, $email, $pseudo); 
-
+            $updateUserInformation = $this->_userModel->updateUserInformation($elements['first_name'], $elements['last_name'], $elements['email'], $elements['pseudo']); 
             if($updateUserInformation === false){
-                $_SESSION['infoUserUpdate'] = "Une erreur c'est produit dans l'enregistrement de la mise à jours de vos informations. Merci de contacter l'administrateur.";
+                echo "Test2";
+                $_SESSION['info']['userGet'] = "Une erreur c'est produit dans l'enregistrement de la mise à jours de vos informations. Merci de contacter l'administrateur.";
             }else{
-                $_SESSION['infoUserUpdate'] = "Vos modifications ont bien été enregistré."; 
+                echo "Test3";
+                $_SESSION['info']['userGet'] = "Vos modifications ont bien été enregistré."; 
                 $userInformation = $this->_userModel->selectUserInfo();
             }
         }else{
             if($arrayCheckUniqueInformation['pseudo'] === false){
-                $_SESSION['infoUserUpdate'] = "Le pseudo choisi est déjà utilisé par un autre utilisateur. Merci d'en choisir un autre";
+                echo "Test4";
+                $_SESSION['info']['userGet'] = "Le pseudo choisi est déjà utilisé par un autre utilisateur. Merci d'en choisir un autre.";
             }else{
-                $_SESSION['infoUserUpdate'] = "L'email choisi est déja utilisé par un autre utilisateur. Merci d'en choisir un autre";
+                echo "Test5";
+                $_SESSION['info']['userGet'] = "L'email choisi est déja utilisé par un autre utilisateur. Merci d'en choisir un autre.";
             }
         }
-        $userInformation = $this->_userModel->selectUserInfo();
-        header('Location: /my-account', true);
+        header('Location: /user/my-account', true);
     }
 
     private function checkUniqueInformation($pseudo, $email){
         $forPseudo = true;
         $forEmail = true;
         if($pseudo !== $_SESSION['pseudo']){
-            $forPseudo = $this->_userModel->tryUpdatePseudo($pseudo, $_SESSION['id']);
+            $forPseudo = $this->_userModel->tryUpdatePseudo($pseudo, $_SESSION['id_user']);
         }
         if($pseudo !== $_SESSION['email']){
-            $forEmail = $this->_userModel->tryUpdateEmail($email, $_SESSION['id']);
+            $forEmail = $this->_userModel->tryUpdateEmail($email, $_SESSION['id_user']);
         }
         return ['pseudo'=>$forPseudo, "email"=>$forEmail];
 
     }
 
-    public function updatePassword($lastPassword, $password1, $password2){
-        
-        if($password1 !== $password2){
-            $_SESSION['userPasswordInfo'] = "Vos nouveaux mot de passe ne sont pas identiques.";
+    public function updatePassword($elements){
+        if($elements['password1'] !== $elements['password2']){
+            $_SESSION['info']['password'] = "Vos nouveaux mot de passe ne sont pas identiques.";
         }else{
-            $lastPasswordSave = $this->_userModel->selectPasswordHash($_SESSION['id']);
-            if( !password_verify($lastPassword, $lastPasswordSave) ){
-                $_SESSION['userPasswordInfo'] = "Votre ancien password ne correspond pas à celui enregistré.";
+            $lastPasswordSave = $this->_userModel->selectPasswordHash($_SESSION['id_user']);
+            if(!password_verify($elements['lastPassword'], $lastPasswordSave) ){
+                $_SESSION['info']['password'] = "Votre ancien password ne correspond pas à celui enregistré.";
             }else{
-                $updatePassword = $this->_userModel->updatePassword( password_hash($password1, PASSWORD_DEFAULT), $_SESSION['id']);
+                $updatePassword = $this->_userModel->updatePassword( password_hash($elements['password1'], PASSWORD_DEFAULT), $_SESSION['id_user']);
                 if(!$updatePassword){
-                    $_SESSION['userPasswordInfo'] = "Une erreur c'est produite lors de l'enregistrement de votre nouveau mot de passe. Merci de contacter l'administateur du site.";
+                    $_SESSION['info']['password'] = "Une erreur c'est produite lors de l'enregistrement de votre nouveau mot de passe. Merci de contacter l'administateur du site.";
                 }else{
-                    $_SESSION['userPasswordInfo'] = 'Votre mot de passe a bien été changé !';
+                    $_SESSION['info']['password'] = 'Votre mot de passe a bien été changé !';
                 }
             }
         }
-        header('Location: /my-account');
+        header('Location: /user/my-account');
     }
 
     public function contact(){

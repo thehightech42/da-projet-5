@@ -37,7 +37,7 @@
                                     Mon Compte
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/my-account">Mes informations</a>
+                                    <a class="dropdown-item" href="/user/my-account">Mes informations</a>
                                     <!-- <a class="dropdown-item" href="#">Modifi</a> -->
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/user/logOut">Deconnexion</a>

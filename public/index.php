@@ -58,7 +58,19 @@ if(!Maintenance(true, $ipAccepted)){}else{
 
     $router->map('GET', '/user/my-account', function(){
         $userControler = new UserControler;
-        $userControler->myAccount();
+        if(isset($_SESSION['info'])){
+            $elements = [];
+            if(isset($_SESSION['info']['userGet'])){
+                $elements['userGet'] = $_SESSION['info']['userGet'];
+            }
+            if(isset($_SESSION['info']['password'])){
+                $elements['password'] = $_SESSION['info']['password'];
+            }
+            unset($_SESSION['info']);
+            $userControler->myaccount($elements);
+        }else{
+            $userControler->myAccount();
+        }
     },'my-account');
 
     $router->map('GET', '/user/logOut', function(){$userControler = new UserControler;$userControler->logOut();}, 'deconnexion');
@@ -79,19 +91,21 @@ if(!Maintenance(true, $ipAccepted)){}else{
         $userControler->connection($elements);
     });
 
-    $router->map('POST', '/updateUserInformation', function(){
+    $router->map('POST', '/user/updateUserInformation', function(){
         $userControler = new UserControler;
-        $userControler->updateUserInformation( htmlspecialchars($_POST['first_name']), 
-        htmlspecialchars($_POST['last_name']),
-        htmlspecialchars($_POST['email']),
-        htmlspecialchars($_POST['pseudo']));
+        $elements['first_name'] = htmlspecialchars($_POST['first_name']);
+        $elements['last_name'] = htmlspecialchars($_POST['last_name']);
+        $elements['email'] = htmlspecialchars($_POST['email']);
+        $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
+        $userControler->updateUserInformation($elements);
     });
 
-    $router->map('POST','/updatePassword', function(){
+    $router->map('POST','/user/updatePassword', function(){
         $userControler = new UserControler;
-        $userControler->updatePassword( htmlspecialchars($_POST['lastPassword']),
-        htmlspecialchars($_POST['password1']), 
-        htmlspecialchars($_POST['password2']));
+        $elements['lastPassword'] = htmlspecialchars($_POST['lastPassword']);
+        $elements['password1'] = htmlspecialchars($_POST['password1']);
+        $elements['password2'] = htmlspecialchars($_POST['password2']);
+        $userControler->updatePassword($elements);
     });
 
 
