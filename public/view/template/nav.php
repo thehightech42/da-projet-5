@@ -10,7 +10,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/posts">Articles</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Projets</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/projects">Projets</a></li>
                         <?php
                         if(isset($_SESSION['admin']) && $_SESSION['admin'] === "3"){
                             ?>
