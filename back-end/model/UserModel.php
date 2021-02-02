@@ -79,7 +79,18 @@ class UserModel extends Model{
 
     public function selectUserInfo(){
         $selectUserInfo = $this->_bdd->prepare('SELECT first_name, last_name, email, pseudo FROM user WHERE id = :id'); 
-        $selectUserInfo->execute(['id'=>$_SESSION['id']]); 
+        $selectUserInfo->execute(['id'=>$_SESSION['id_user']]); 
+        if($selectUserInfo->rowcount() !== 1 || $selectUserInfo === false){
+            return false;
+        }else{
+            $userInfo = $selectUserInfo->fetch();
+            return $userInfo;
+        }
+    }
+
+    public function selectUserInfoWithId($id){
+        $selectUserInfo = $this->_bdd->prepare('SELECT first_name, last_name, email, pseudo FROM user WHERE id = :id'); 
+        $selectUserInfo->execute(['id'=>$id]); 
         if($selectUserInfo->rowcount() !== 1 || $selectUserInfo === false){
             return false;
         }else{
@@ -119,4 +130,14 @@ class UserModel extends Model{
         }
     }
 
+    public function selectUserType($id){
+        $selectUserType = $this->_bdd->prepare('SELECT id_user_type FROM user WHERE id = :id'); 
+        $selectUserType->execute(['id'=>$id]);
+        if($selectUserType->rowcount() !== 1 || $selectUserType === false){
+            return false;
+        }else{
+            $idUserType = $selectUserType->fetch();
+            return $idUserType['id_user_type'];
+        }
+    }
 }

@@ -1,11 +1,58 @@
+/* Tout de site */
+/* h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: Roboto, Nunito;
+} */
+
+a.nav-link{
+    /* font-family: Nunito !important; */
+    font-size: 1.05em !important;
+}
+
+body{
+    /* font-family: Roboto, Nunito !important; */
+    position: relative;
+}
+
+input.form-control, textarea, input.form-control:focus, textarea:focus textarea.form-control, textarea.form-control:focus{
+    background-color : #575757 !important;
+    color: #d1cccc !important;
+}
+
 /* Header - Barre de navigatetion */
-.nav_perso{
+ .nav_perso{
     background-color: #212529 !important;
+    /* display: none; */
+} 
+
+/* Barre d'administration */
+#navAdmin{
+    background-color : #212529;
+}
+
+ol a.admin{
+    color: white !important;
+    font-size: 1.1em;
+    line-height: 2em;
+}
+
+ol a.admin:hover{
+    color:grey !important;
+}
+
+ol{
+    padding-left: 0;
+    padding-bottom: 0.5em;
+}
+
+.rowNavHadmin{
+    min-height:80vh;
+    height:100% !important;
 }
 
 #content.other_home{
-    padding-top:90px;
-}
+    padding-top:80px;
+    min-height: 88vh !important;
+} 
 
 /* Page de contact */
 section#contactContainer{
@@ -23,4 +70,16 @@ textarea.form-control{
 
 #contactForm .row .col-md-6 .form-group:nth-child(2){
     margin-top: 3rem !important;
+}
+
+/* Footer */
+footer{
+    background-color: #212529;
+    /* position: absolute;  */
+    bottom:0;
+    width:100%;
+}
+
+.yellow{
+    color :#e6b301;
 }
