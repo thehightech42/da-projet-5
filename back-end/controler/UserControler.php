@@ -141,7 +141,7 @@ class UserControler{
         }else{
             $lastPasswordSave = $this->_userModel->selectPasswordHash($_SESSION['id_user']);
             if(!password_verify($elements['lastPassword'], $lastPasswordSave) ){
-                $_SESSION['info']['password'] = "Votre ancien password ne correspond pas à celui enregistré.";
+                $_SESSION['info']['password'] = "Votre ancien mot de passe ne correspond pas à celui enregistré.";
             }else{
                 $updatePassword = $this->_userModel->updatePassword( password_hash($elements['password1'], PASSWORD_DEFAULT), $_SESSION['id_user']);
                 if(!$updatePassword){
