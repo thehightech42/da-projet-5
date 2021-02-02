@@ -154,11 +154,11 @@ class UserControler{
         header('Location: /user/my-account');
     }
 
-    public function contact(){
+    public function contact($elements = null){
         require('view/contact.php');
     }
 
-    public function sendMailContact($name, $email, $content){
+    public function sendMailContact($elements){
         $contenu = 
         "<html>
             <head>
@@ -166,30 +166,34 @@ class UserControler{
             </head>
             <body>
                 <h2>Nom :</h2>
-                <p>". $name ."</p>
+                <p>". $elements["first&last_name"] ."</p>
                 <hr>
                 <h2>Email du contact :</h2>
-                <p>". $email."</p>
+                <p>". $elements["email"]."</p>
                 <hr>
                 <h2>Contenu</h2>
-                <p>". $content ."</p>
+                <p>". $elements["content_message"] ."</p>
             </body>
         </html>";
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-        $headers .= 'From: ' . $email . "\r\n";
+        $headers .= 'From: ' . $elements["email"] . "\r\n";
 
         $mail = mail('contact@antoninpfistner.fr', "Message du site projet-5.antoninpfistner.fr", $contenu, $headers );
         if($mail){
             $_SESSION['infoContact'] = "Votre message à bien été envoyé !";
-        }else{
-            $_SESSION['infoContactUser']['name'] = $name;
-            $_SESSION['infoContactUser']['email'] = $email;
-            $_SESSION['infoContactUser']['content'] = $content;
-            $_SESSION['infoContact'] = error_get_last()['message'];
 
+        }else{
+            $_SESSION['infoContactUser']['name'] = $elements["first&last_name"];
+            $_SESSION['infoContactUser']['email'] = $elements["email"];
+            $_SESSION['infoContactUser']['content'] = $elements["content_message"];
+            $_SESSION['infoContact'] = error_get_last()['message'];
         }
-        $this->contact();
+        if( isset($elements["home"]) ){
+            header('Location: /#contact');
+        }else{
+            header('Location: /contact');
+        }
     }
 
 }

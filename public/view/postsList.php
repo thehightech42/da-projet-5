@@ -14,18 +14,28 @@ ob_start();
         }else{
             foreach($posts as $post){
                 ?>
-                <div class="row mb-3">
-                    <div class="col-lg-12">
+                <div class="card mt-3 mb-3">
+                    <div class="card-header">
                         <h6><a href="<?php echo '/post/'.$post['id'].''?>"><?= $post['title']?></a></h6>
-                        <p><?= $post['short_description']?>
-                        <p>Ecrit par <?= $post['pseudo'] ?>,<?php 
-                            if($post['last_update'] !== NULL ){
-                                echo ' mis à jour le '.$post['last_update'];
-                            }else{
-                                echo ' publié le '.$post['publication_date'];}
-                            ?></p>
                     </div>
-                </div>                    
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                        <p><?= $post['short_description']?></p>
+                        <footer class="blockquote-footer">Ecrit par <cite title="Source Title"><?= $post['pseudo']?></cite></footer>
+                        </blockquote>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <?php 
+                            if($post['last_update'] !== NULL ){
+                                $objDate = new DateTime($post['last_update']);
+                                echo ' Mis à jour le '.$objDate->format('d F Y');
+                            }else{
+                                $objDate = new DateTime($post['publication_date']);
+                                echo ' Publié le '.$objDate->format('d F Y');}
+                        ?>
+                    </div>
+                </div>
+                                   
                 <?php
             }
         }

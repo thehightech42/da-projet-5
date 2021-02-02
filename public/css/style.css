@@ -76,7 +76,7 @@ textarea.form-control{
 }
 
 /* Footer */
-footer{
+footer:not(.blockquote-footer){
     background-color: #212529;
     /* position: absolute;  */
     bottom:0;
@@ -91,4 +91,9 @@ footer{
 
 svg .fa-2x{
     color:grey !important;
+}
+
+/* Suppression margin contact */
+.form-group.margin-hidden{
+    margin-bottom: 0 !important;
 }

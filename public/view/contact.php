@@ -14,19 +14,19 @@ ob_start();
                     <div class="col-md-6">
                         <div class="form-group">
                             <input class="form-control" name="first&last_name" type="text" placeholder="Votre Nom et Prénom *" required="required" data-validation-required-message="Please enter your name."
-                            value="<?php if(isset($_SESSION['infoContactUser'])){echo $_SESSION['infoContactUser']['name'];}?>"/>
+                            value="<?php if(isset($elements["first&last_name"])){echo $elements["first&last_name"];}?>"/>
                             <!-- <p class="help-block text-danger"></p> -->
                         </div>
                         <div class="form-group">
                             <input class="form-control" name="contact_email" type="email" placeholder="Votre Email *" required="required" data-validation-required-message="Please enter your email address." 
-                            value="<?php if(isset($_SESSION['infoContactUser'])){echo $_SESSION['infoContactUser']['email'];}?>"/>
+                            value="<?php if(isset($elements["email"])){echo $elements["email"];}?>"/>
                             <!-- <p class="help-block text-danger"></p> -->
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group form-group-textarea mb-md-0">
                             <textarea class="form-control" name="content_message" placeholder="Votre Message *" required="required" data-validation-required-message="Please enter a message."
-                            ><?php if(isset($_SESSION['infoContactUser'])){echo $_SESSION['infoContactUser']['name']; unset($_SESSION['infoContactUser']);}?></textarea>
+                            ><?php if(isset($elements["content_message"])){echo $elements["content_message"];}?></textarea>
                             <!-- <p class="help-block text-danger"></p> -->
                         </div>
                     </div>
@@ -37,7 +37,7 @@ ob_start();
                 </div>
             </form>
             <div>
-                <p><?php if(isset($_SESSION['infoContact'])){echo $_SESSION['infoContact'];}unset($_SESSION['infoContact']);?></p>
+                <p><?php if(isset($elements["info"])){echo $elements["info"];};?></p>
             </div>
         </div>
     </section>

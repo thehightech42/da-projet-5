@@ -112,13 +112,27 @@ if(!Maintenance(true, $ipAccepted)){}else{
     //Contact
     $router->map('GET', '/contact', function(){
     $userControler = new UserControler;
-    $userControler->contact();
+    if(isset($_SESSION['infoContactUser'])){
+        $elements["email"] = $_SESSION['infoContactUser']['email'];
+        $elements["first&last_name"] = $_SESSION['infoContactUser']['name'];
+        $elements["content_message"] =  $_SESSION['infoContactUser']['content'];
+        $elements["info"] = $_SESSION['infoContact'];
+        $userControler->contact($elements);
+    }else{
+        $userControler->contact();
+    }
     }, 'contact');
+
     $router->map('POST', '/sendMailContact', function(){
         $userControler = new UserControler;
-        $userControler->sendMailContact( htmlspecialchars($_POST['first&last_name']),
-        htmlspecialchars($_POST['contact_email']),
-        htmlspecialchars($_POST['content_message']));
+        $elements["email"] = htmlspecialchars($_POST['contact_email']);
+        $elements["first&last_name"] = htmlspecialchars($_POST['first&last_name']);
+        $elements["content_message"] = htmlspecialchars($_POST['content_message']);
+        $elements["info"] = $_SESSION['infoContact'];
+        if(isset($_POST["formHome"])){
+            $elements["home"] = htmlspecialchars($_POST["formHome"]);
+        };
+        $userControler->sendMailContact($elements);
     });
 
 

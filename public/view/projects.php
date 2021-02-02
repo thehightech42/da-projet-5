@@ -151,7 +151,7 @@ ob_start();
 <div class="portfolio-modal modal fade" id="dap2" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal"><img src="img/icon/close-icon.svg" alt="Close modal" /></div>
+            <div class="close-modal" data-dismiss="modal"><img src="img/Icon/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -186,7 +186,7 @@ ob_start();
 <div class="portfolio-modal modal fade" id="dap3" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal"><img src="img/icon/close-icon.svg" alt="Close modal" /></div>
+            <div class="close-modal" data-dismiss="modal"><img src="img/Icon/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -227,7 +227,7 @@ ob_start();
 <div class="portfolio-modal modal fade" id="dap5" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal"><img src="img/icon/close-icon.svg" alt="Close modal" /></div>
+            <div class="close-modal" data-dismiss="modal"><img src="img/Icon/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -268,7 +268,7 @@ ob_start();
 <div class="portfolio-modal modal fade" id="dwjp1" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal"><img src="img/icon/close-icon.svg" alt="Close modal" /></div>
+            <div class="close-modal" data-dismiss="modal"><img src="img/Icon/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -303,7 +303,7 @@ ob_start();
 <div class="portfolio-modal modal fade" id="dwjp2" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal"><img src="img/icon/close-icon.svg" alt="Close modal" /></div>
+            <div class="close-modal" data-dismiss="modal"><img src="img/Icon/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -338,7 +338,7 @@ ob_start();
 <div class="portfolio-modal modal fade" id="dwjp3" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal"><img src="img/icon/close-icon.svg" alt="Close modal" /></div>
+            <div class="close-modal" data-dismiss="modal"><img src="img/Icon/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -373,7 +373,7 @@ ob_start();
 <div class="portfolio-modal modal fade" id="dwjp4" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal"><img src="img/icon/close-icon.svg" alt="Close modal" /></div>
+            <div class="close-modal" data-dismiss="modal"><img src="img/Icon/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -408,7 +408,7 @@ ob_start();
 <div class="portfolio-modal modal fade" id="dwjp5" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal"><img src="img/icon/close-icon.svg" alt="Close modal" /></div>
+            <div class="close-modal" data-dismiss="modal"><img src="img/Icon/close-icon.svg" alt="Close modal" /></div>
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
