@@ -8,6 +8,7 @@ require "../gestionAcces.php";
 
 use \App\controler\UserControler; 
 use \App\controler\PostControler; 
+use \App\controler\AdminControler;
 // phpinfo();
 
 /**
@@ -109,6 +110,14 @@ if(!Maintenance(true, $ipAccepted)){}else{
         $postControler->insertComment($elements);
     });
 
+    // Pages
+    $router->map('GET', '/mentions-legales', function(){
+        require('view/mentions-legales.php');
+    });
+
+    $router->map('GET', '/projects', function(){
+        // Code pour afficher la page projet
+    });
 
 
     if(isset($_SESSION['admin']) && $_SESSION['admin'] === "3"){
@@ -187,8 +196,9 @@ if(!Maintenance(true, $ipAccepted)){}else{
         });
 
         // Zone admin
-        $router->map('GET', '/admin', function(){
-            // Ma fonction pour le dashboard
+        $router->map('GET', '/admin/dashboard', function(){
+            $adminControler = new AdminControler;
+            $adminControler->dashboard();
         });
 
         $router->map('GET', '/admin/posts', function(){
@@ -201,9 +211,6 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $postControler->adminPosts();
         });
 
-        
-        
-
     } 
     //End admin
 
@@ -212,7 +219,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
     if( is_array($match) && is_callable( $match['target']) ) {
         call_user_func_array( $match['target'], $match['params'] ); 
     } else {
-        header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+        // header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+        require('view/404.php');
     }
-
 }
