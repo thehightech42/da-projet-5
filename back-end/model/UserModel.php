@@ -106,13 +106,13 @@ class UserModel extends Model{
             return false;
         }else{
             $email = $selectEmail->fetch(); 
-            return $email;
+            return $email['email'];
         }
     }
 
     public function updateUserInformation($first_name, $last_name, $email, $pseudo){
         $updateUserInformation = $this->_bdd->prepare('UPDATE user SET first_name = :first_name, last_name = :last_name, email = :email, pseudo = :pseudo WHERE id = :id');
-        $updateUserInformation->execute(['first_name'=>$first_name, 'last_name'=>$last_name, 'email'=>$email, 'pseudo'=>$pseudo, 'id'=>$_SESSION['id']]);
+        $updateUserInformation->execute(['first_name'=>$first_name, 'last_name'=>$last_name, 'email'=>$email, 'pseudo'=>$pseudo, 'id'=>$_SESSION['id_user']]);
         if($updateUserInformation->rowcount() !== 1 || $updateUserInformation === false ){
             return false;
         }else{
