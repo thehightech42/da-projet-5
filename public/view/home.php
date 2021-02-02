@@ -115,7 +115,7 @@ if(isset($test)){
             </div>
         </form>
         <div>
-            <p><?php if(isset($elements['info'])){echo $elements['info'];};?></p>
+            <p class="infoSendEmail"><?php if(isset($elements['info'])){echo $elements['info'];};?></p>
         </div>
     </div>
 </section>

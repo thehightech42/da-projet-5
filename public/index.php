@@ -34,7 +34,32 @@ function Maintenance($activation, $ipAccepted){
 $router = new AltoRouter();
 if(!Maintenance(true, $ipAccepted)){}else{
     
-    $router->map('GET', '/', function(){ require("view/home.php");} , 'home');
+    $router->map('GET', '/', function(){if(isset($_SESSION['infoContactUser'])){
+        if(isset($_SESSION['infoContactUser']['email'])){
+            $elements["email"] = $_SESSION['infoContactUser']['email'];
+            unset($_SESSION['infoContactUser']['email']);
+        }
+        if(isset($_SESSION['infoContactUser']['name'])){
+            $elements["first&last_name"] = $_SESSION['infoContactUser']['name'];
+            unset($_SESSION['infoContactUser']['name']);
+        }
+        if(isset($_SESSION['infoContactUser']['content'])){
+            $elements["content_message"] =  $_SESSION['infoContactUser']['content'];
+            unset($_SESSION['infoContactUser']['content']);
+        }
+        if(isset($_SESSION['infoContact'])){
+            $elements["info"] = $_SESSION['infoContact'];
+            unset($_SESSION['infoContact']);
+        }
+    }else if(isset($_SESSION['infoContact']) && !isset($_SESSION['infoContactUser'])){
+        if(isset($_SESSION['infoContact'])){
+            $elements["info"] = $_SESSION['infoContact'];
+            unset($_SESSION['infoContact']);
+        }
+    }
+        // var_dump($elements);
+        require("view/home.php");
+    } , 'home');
 
     /**
      * Parti utilisateur
@@ -112,15 +137,35 @@ if(!Maintenance(true, $ipAccepted)){}else{
     //Contact
     $router->map('GET', '/contact', function(){
     $userControler = new UserControler;
+    $elements = [];
     if(isset($_SESSION['infoContactUser'])){
-        $elements["email"] = $_SESSION['infoContactUser']['email'];
-        $elements["first&last_name"] = $_SESSION['infoContactUser']['name'];
-        $elements["content_message"] =  $_SESSION['infoContactUser']['content'];
-        $elements["info"] = $_SESSION['infoContact'];
+        if(isset($_SESSION['infoContactUser']['email'])){
+            $elements["email"] = $_SESSION['infoContactUser']['email'];
+            unset($_SESSION['infoContactUser']['email']);
+        }
+        if(isset($_SESSION['infoContactUser']['name'])){
+            $elements["first&last_name"] = $_SESSION['infoContactUser']['name'];
+            unset($_SESSION['infoContactUser']['name']);
+        }
+        if(isset($_SESSION['infoContactUser']['content'])){
+            $elements["content_message"] =  $_SESSION['infoContactUser']['content'];
+            unset($_SESSION['infoContactUser']['content']);
+        }
+        if(isset($_SESSION['infoContact'])){
+            $elements["info"] = $_SESSION['infoContact'];
+            unset($_SESSION['infoContact']);
+        }
+        $userControler->contact($elements);
+    }else if(isset($_SESSION['infoContact']) && !isset($_SESSION['infoContactUser'])){
+        if(isset($_SESSION['infoContact'])){
+            $elements["info"] = $_SESSION['infoContact'];
+            unset($_SESSION['infoContact']);
+        }
         $userControler->contact($elements);
     }else{
         $userControler->contact();
-    }
+        }
+        var_dump($elements);
     }, 'contact');
 
     $router->map('POST', '/sendMailContact', function(){
@@ -270,7 +315,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
 
     $match = $router->match();
     if( is_array($match) && is_callable( $match['target']) ) {
-        call_user_func_array( $match['target'], $match['params'] ); 
+        call_user_func_array( $match['target'], $match['params'] );
     } else {
         // header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
         require('view/404.php');
