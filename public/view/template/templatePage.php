@@ -13,3 +13,7 @@ require('nav.php');
 
 
 require('footer.php');
+
+if(isset($modal)){
+    echo $modal;
+}

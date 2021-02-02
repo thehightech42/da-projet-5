@@ -155,7 +155,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
     });
 
     $router->map('GET', '/projects', function(){
-        // Code pour afficher la page projet
+        require('view/projects.php');
     });
 
 
