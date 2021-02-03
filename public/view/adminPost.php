@@ -36,7 +36,12 @@ ob_start();
                                 ?>
                                 <tr>
                                     <th scope="row"><?= $i ?></th>
-                                    <td><a href="/post/<?= $post['id'] ?>"><?= $post['title'] ?></a></td>
+                                    <td><?php if($post['status'] === "Brouillon"){
+                                        ?><a href="/updatePost/<?= $post['id'] ?>"><?= $post['title'] ?><?php
+                                            }else{
+                                            ?><a href="/post/<?= $post['id'] ?>"><?= $post['title'] ?></a><?php
+                                        }?>
+                                    </td>
                                     <td><?= $post['pseudo'] ?></td>
                                     <td><?= $post['status'] ?></td>
                                     <td><?= $post['publicationDate'] ?></td>
