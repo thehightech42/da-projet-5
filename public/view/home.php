@@ -10,8 +10,8 @@ if(isset($test)){
 <!-- Masthead-->
 <header class="masthead">
     <div class="container">
-        <div class="masthead-subheading">Bienvenie Dans Mon Monde</div>
-        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+        <div class="masthead-subheading">Welcom in my world</div>
+        <div class="masthead-heading text-uppercase">A simple web développement</div>
         <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/contact">Contactez - Moi !</a>
     </div>
 </header>
@@ -30,7 +30,7 @@ if(isset($test)){
                 <div class="timeline-panel">
                     <div class="timeline-heading">
                         <h4>2013-2016</h4>
-                        <h4 class="subheading">Baccalaureat</h4>
+                        <h4 class="subheading">Baccalauréat</h4>
                     </div>
                     <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
                 </div>
@@ -83,7 +83,7 @@ if(isset($test)){
 <section class="page-section" id="contact">
     <div class="container">
         <div class="text-center">
-            <h2 class="section-heading text-uppercase">Contacter moi</h2>
+            <h2 class="section-heading text-uppercase">Contactez moi</h2>
             <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
         </div>
         <form id="contactForm" method="POST" action="/sendMailContact">
