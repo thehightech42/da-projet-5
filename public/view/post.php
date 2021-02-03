@@ -1,7 +1,7 @@
 <?php
 // var_dump($post);
 $titlePage = $post['title'];
-// $shortDescription = $post['short_description'];
+$shortDescription = $post['short_description'];
 
 ob_start();
 ?>

@@ -3,6 +3,27 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <?php
+            if(isset($post['short_description'])){
+                $shortDescription = $post['short_description'];
+            }else{
+                $shortDescription = "Antonin Pfistner | Etudiant développeur Web Full Stack";
+            }
+        ?>
+        <!-- SEO -->
+        <meta name="title" content="<?= $titlePage ?>"/>
+        <meta name="description" content="<?= $shortDescription ?>"/>
+        <meta name="url" content="https://projet-5.antoninpfistner.fr"/>
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:title" content="<?= $titlePage ?>"/>
+        <meta name="twitter:description" content="<?= $shortDescription ?>"/>
+
+        <meta property="og:title" content="<?= $titlePage ?>"/>
+        <meta property="og:description" content="<?= $shortDescription ?>"/>
+        <meta property="og:type" content="Un blog d'étudiant avec une api calculer des informations de crédit."/>
+        <meta property="og:url" content="https://projet-5.antoninpfistner.fr"/>
+        <!-- FIN SEO -->
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title><?=  $titlePage ?></title>
