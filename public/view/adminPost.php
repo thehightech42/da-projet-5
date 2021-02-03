@@ -7,7 +7,7 @@ ob_start();
 <div class="row justify-content-center">
         <div class="col-lg-10"><h5>Article</h5> </div>
         <div class="col-lg-10">
-            <p>Voici un tableau récapitulatif de l'ensemble des articles du publié sur le site.</p>
+            <p>Voici le récapitulatif des articles publiés ou en attente de publication sur le site.</p>
         </div>
 
         <div class="col-lg-10">
