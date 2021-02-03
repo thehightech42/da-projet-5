@@ -59,7 +59,7 @@ ob_start();
         </div>
         
         <div>
-            <h4 class="section-heading text-uppercase">Développeur Web Junir - Openclassrooms</h4>
+            <h4 class="section-heading text-uppercase">Développeur Web Junior - Openclassrooms</h4>
             <h6 class="section-subheading text-muted">Formation Bac +2</h6>
         </div>
         <div class="row">
