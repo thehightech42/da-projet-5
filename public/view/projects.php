@@ -23,7 +23,7 @@ ob_start();
                         <img class="img-fluid" src="img/da/p2.png" alt="" />
                     </a>
                     <div class="portfolio-caption">
-                        <div class="portfolio-caption-heading">Personaliser un thème Wordpress</div>
+                        <div class="portfolio-caption-heading">Personnaliser un thème Wordpress</div>
                         <div class="portfolio-caption-subheading text-muted">Wordpress</div>
                     </div>
                 </div>
@@ -157,13 +157,13 @@ ob_start();
                     <div class="col-lg-8">
                         <div class="modal-body">
                             <!-- Project Details Go Here-->
-                            <h2 class="text-uppercase">Intégrez la maquette du site d'une agence web</h2>
-                            <p class="item-intro text-muted">Réalisation en HTML et CSS pur d'une maquette</p>
+                            <h2 class="text-uppercase">Création d'un site wordpress.</h2>
+                            <p class="item-intro text-muted">Personnaliser un theme Wordpress pour une agence immobilière.</p>
                             <img class="img-fluid d-block mx-auto" src="img/da/p2.png" alt="" />
                             <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                             <ul class="list-inline">
                                 <li>Type: Wordpress</li>
-                                <li>Projet scolare</li>
+                                <li>Projet scolaire</li>
                             </ul>
                             <button class="btn btn-primary" data-dismiss="modal" type="button">
                                 <i class="fas fa-times mr-1"></i>
@@ -193,7 +193,7 @@ ob_start();
                         <div class="modal-body">
                             <!-- Project Details Go Here-->
                             <h2 class="text-uppercase">Cahier des charges et maquette</h2>
-                            <p class="item-intro text-muted">Réalisation d'un cahier des charges pour une association et de maquette</p>
+                            <p class="item-intro text-muted">Réalisation d'un cahier des charges et d'une maquette de site web pour une association</p>
                             <img class="img-fluid d-block mx-auto" src="img/da/p3.png" alt="" />
                             <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                             <ul class="list-inline">
@@ -310,7 +310,7 @@ ob_start();
                         <div class="modal-body">
                             <!-- Project Details Go Here-->
                             <h2 class="text-uppercase">Création d'un site wordpress</h2>
-                            <p class="item-intro text-muted">Personalisation d'un thème wordpress pour le site d'un office de tourisme</p>
+                            <p class="item-intro text-muted">Personnalisation d'un thème wordpress pour le site d'un office de tourisme</p>
                             <img class="img-fluid d-block mx-auto" src="img/dwj/p2.png" alt="" />
                             <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                             <ul class="list-inline">
@@ -380,7 +380,7 @@ ob_start();
                         <div class="modal-body">
                             <!-- Project Details Go Here-->
                             <h2 class="text-uppercase">Un blog pour un écrivain</h2>
-                            <p class="item-intro text-muted">Création d'un blog pour pour un écrivain afin de publier chapitres par chapitres un livre.</p>
+                            <p class="item-intro text-muted">Création d'un blog pour un écrivain afin de publier un livre chapitre par chapitre.</p>
                             <img class="img-fluid d-block mx-auto" src="img/dwj/p4.png" alt="" />
                             <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                             <ul class="list-inline">
@@ -415,7 +415,7 @@ ob_start();
                         <div class="modal-body">
                             <!-- Project Details Go Here-->
                             <h2 class="text-uppercase">Projet libre</h2>
-                            <p class="item-intro text-muted">Création d'une blog ainsi que d'une api de crédit</p>
+                            <p class="item-intro text-muted">Création d'un blog ainsi que d'une API de crédits.</p>
                             <img class="img-fluid d-block mx-auto" src="img/dwj/p5.png" alt="" />
                             <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
                             <ul class="list-inline">
