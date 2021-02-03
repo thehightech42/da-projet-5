@@ -19,7 +19,7 @@
                                     Administration
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/createPost">Crée un article</a>
+                                    <a class="dropdown-item" href="/createPost">Créer un article</a>
                                     <a class="dropdown-item" href="/admin/commentModeration">Modération des commentaires</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
