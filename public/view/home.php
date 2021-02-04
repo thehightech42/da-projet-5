@@ -10,8 +10,8 @@ if(isset($test)){
 <!-- Masthead-->
 <header class="masthead">
     <div class="container">
-        <div class="masthead-subheading">Welcom in my world</div>
-        <div class="masthead-heading text-uppercase">A simple web développement</div>
+        <div class="masthead-subheading">Welcome in my world</div>
+        <div class="masthead-heading text-uppercase">A simple web</div>
         <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/contact">Contactez - Moi !</a>
     </div>
 </header>
@@ -50,7 +50,7 @@ if(isset($test)){
                 <div class="timeline-panel">
                     <div class="timeline-heading">
                         <h4>2018 - 2020</h4>
-                        <h4 class="subheading">Développeur Web Junior - OpenClassrooms</h4>
+                        <h4 class="subheading">Développeur Web Junior</h4>
                     </div>
                     <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
                 </div>

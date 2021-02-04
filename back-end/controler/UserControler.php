@@ -1,14 +1,21 @@
 <?php
 namespace App\controler;
 use App\model\UserModel;
+use App\utile\Token;
 
 class UserControler{
 
     function __construct(){
        $this->_userModel = new UserModel;
+       $this->_token = Token::generateToken();
+    }
+
+    public function account(){
+        require("view/account.php");
     }
 
     public function insertUser($elements){
+        
         $tryEmail = $this->_userModel->tryEmail($elements['email']);
         $tryPseudo = $this->_userModel->tryPseudo($elements['pseudo']);
 

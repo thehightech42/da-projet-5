@@ -165,7 +165,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
     }else{
         $userControler->contact();
         }
-        var_dump($elements);
+        // var_dump($elements);
     }, 'contact');
 
     $router->map('POST', '/sendMailContact', function(){
@@ -312,7 +312,6 @@ if(!Maintenance(true, $ipAccepted)){}else{
     } 
     //End admin
 
-
     $match = $router->match();
 
     if(is_array($match['params']) || is_object($match['params'])){
@@ -330,5 +329,4 @@ if(!Maintenance(true, $ipAccepted)){}else{
     }else{
         require('view/404.php');
     }
-
 }

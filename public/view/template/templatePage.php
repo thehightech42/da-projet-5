@@ -2,15 +2,24 @@
 require('header.php'); 
 require('nav.php');
 
-?>
-
-<div id="content" class="<?php if( $_SERVER['REQUEST_URI'] !== '/'){echo "other_home";}?>">
+if( $_SERVER['REQUEST_URI'] !== '/'){?>
+<div id="content" class="other_home container-fluid">
     <?= $content; ?>
 </div>
+<?php
+}else{
+    ?>
+    <div id="content">
+        <?= $content; ?>
+    </div>
+    <?php
+}
+
+?>
+
+
 
 <?php
-    // echo $scriptPage;
-
 
 require('footer.php');
 
