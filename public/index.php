@@ -314,10 +314,21 @@ if(!Maintenance(true, $ipAccepted)){}else{
 
 
     $match = $router->match();
-    if( is_array($match) && is_callable( $match['target']) ) {
-        call_user_func_array( $match['target'], $match['params'] );
-    } else {
-        // header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+
+    if(is_array($match['params']) || is_object($match['params'])){
+        $params = [];
+        foreach($match['params'] as $param){
+            array_push($params, htmlspecialchars($param)); 
+        }
+        if( is_array($match) && is_callable( $match['target']) ) {
+            call_user_func_array( $match['target'], $params );
+        } else {
+            // header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+            require('view/404.php');
+        }
+
+    }else{
         require('view/404.php');
     }
+
 }
