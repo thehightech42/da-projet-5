@@ -37,4 +37,34 @@ class Security{
         }
     }
 
+    public static function checkSession(){
+        if(!isset($_SESSION['_lastConnection'])){
+            $_SESSION['_lastConnection'] = time();
+        }
+        if(!isset($_SESSION['_ipUser'])){
+            $_SESSION['_ipUser'] = $_SERVER['REMOTE_ADDR'];
+        }
+        if( ($_SESSION['_ipUser'] === $_SERVER['REMOTE_ADDR']) && ($_SESSION['_lastConnection'] + (60*60) > time()) ){
+            $_SESSION['_lastConnection'] = time();
+            return;
+            exit;
+        }else{
+            session_destroy();
+            header('Location: /#secu');
+            exit; 
+        }
+        // if($_SESSION['_ipUser'] !== $_SERVER['REMOTE_ADDR']){
+        //     session_destroy();
+        //     header('Location: /#secu');
+        //     exit;
+        // }
+        // if($_SESSION['_lastConnextion'] + (60*60) < time() ){
+        //     session_destroy();
+        //     header('Location: /#secu');
+        //     exit;
+        // }
+        // return;
+    }
+
 }
+

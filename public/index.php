@@ -31,6 +31,7 @@ function Maintenance($activation, $ipAccepted){
         return true;
     }
 }
+Security::checkSession();
 
 $router = new AltoRouter();
 if(!Maintenance(true, $ipAccepted)){}else{
