@@ -5,6 +5,7 @@ ob_start();
 if(isset($test)){
     echo $test;
 }
+use App\utile\Security;
 ?>
 
 <!-- Masthead-->
@@ -111,6 +112,7 @@ if(isset($test)){
             </div>
             <div class="text-center">
                 <div id="success"></div>
+                <input type="hidden" name="token" value="<?= Security::generateToken() ?>">
                 <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Envoyer votre message</button>
             </div>
         </form>
@@ -123,6 +125,44 @@ if(isset($test)){
 <?php
 
 $content = ob_get_clean();
+
+ob_start();
+?>
+<div class="modal fade" id="secu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<?php
+$modal = ob_get_clean();
+
+ob_start();
+?>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+window.onload = function (){
+    if(window.location.href.indexOf('#secu') !== -1){
+    alert("D'après nos système de sécurité, une erreur c'est produit. Nous avons coupé la session en cours. Merci de modifier votre mot de passe et surveiller votre connexion internet.")
+    }
+}
+</script>
+<?php
+$scriptPage = ob_get_clean();
+
 
 require('template/templatePage.php');
 

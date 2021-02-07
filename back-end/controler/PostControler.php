@@ -2,11 +2,13 @@
 namespace App\controler;
 use App\model\PostModel;
 use App\model\UserModel;
+use App\utile\Security;
 
 class PostControler{
 
     function __construct(){
         $this->_postModel = new PostModel;
+        $this->_token = Security::generateToken();
     }
 
     public function createPost(){

@@ -25,6 +25,7 @@ ob_start();
                 <label for="password2">Confirmez mot de passe :</label>
                 <input type="password" name="password2" id="inputPassword2" class="input form-control" placeholder="Confirmez mot de passe">
             </div>
+            <input type="hidden" name="token" value="<?= $this->_token ?>">
             <div class="col-lg-10 offset-lg-1 form-group">
                 <input type="submit" class="btn btn-dark" name="submit" value="S'inscrire">
             </div>
@@ -32,7 +33,7 @@ ob_start();
         <?php
             if(isset($elements['info']['registration'])){
                  ?>
-                    <p> <?php echo $elements['info']['registration']; ?></p>
+                    <p> <?= $elements['info']['registration']; ?></p>
                  <?php
             }
         ?>
@@ -50,6 +51,7 @@ ob_start();
                 <label for="password">Votre mot de passe :</label>
                 <input type="password" name="password" class="input form-control" placeholder="Votre mot de passe">
             </div>
+            <input type="hidden" name="token" value="<?= $this->_token ?>">
             <div class="col-lg-10 offset-lg-1">
                 <input type="submit" class="btn btn-dark" name="submit" value="Connexion">
             </div>

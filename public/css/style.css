@@ -96,3 +96,13 @@ svg .fa-2x{
 .form-group.margin-hidden{
     margin-bottom: 0 !important;
 }
+
+/* Admin List Post */
+button.buttonAdminListPost{
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: #fed136;
+}
+button.buttonAdminListPost:hover{
+    color: #e6b301;
+}

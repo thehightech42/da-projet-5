@@ -46,7 +46,7 @@ ob_start();
                                     <td><?= $post['status'] ?></td>
                                     <td><?= $post['publicationDate'] ?></td>
                                     <td><a href="/updatePost/<?= $post['id'] ?>"><i class="far fa-edit"></i></a></td>
-                                    <td><a href="/deletePost/<?= $post['id'] ?>"><i class="far fa-trash-alt"></i></a></td>
+                                    <td><form action="/deletePost/<?= $post['id'] ?>" method="POST"><input type="hidden" name="token" value="<?= $this->_token ?>"><button class="buttonAdminListPost"type="submit"><i class="far fa-trash-alt"></i></button></form></td>
                                 </tr>
                             <?php
                             $i++;

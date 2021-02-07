@@ -33,6 +33,7 @@ ob_start();
                 </div>
                 <div class="text-center">
                     <div id="success"></div>
+                    <input type="hidden" name="token" value="<?= $this->_token ?>">
                     <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Envoyer votre message</button>
                 </div>
             </form>

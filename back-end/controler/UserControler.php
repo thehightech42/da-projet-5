@@ -1,16 +1,16 @@
 <?php
 namespace App\controler;
 use App\model\UserModel;
-use App\utile\Token;
+use App\utile\Security;
 
 class UserControler{
 
     function __construct(){
        $this->_userModel = new UserModel;
-       $this->_token = Token::generateToken();
+       $this->_token = Security::generateToken();
     }
 
-    public function account(){
+    public function account($elements = null){
         require("view/account.php");
     }
 

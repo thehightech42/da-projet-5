@@ -11,6 +11,7 @@ require "../gestionAcces.php";
 use \App\controler\UserControler; 
 use \App\controler\PostControler; 
 use \App\controler\AdminControler;
+use \App\utile\Security;
 // phpinfo();
 
 /**
@@ -65,6 +66,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
      * Parti utilisateur
      */
     $router->map('GET', '/user/account', function(){
+        $userControler = new UserControler;
         $elements = [];
         if(isset($_SESSION['info'])){
             $elements['info'] = $_SESSION['info'];
@@ -78,7 +80,13 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $elements['pseudo'] = $_SESSION['pseudo'];
             unset($_SESSION['pseudo']);
         }
-        require("view/account.php");
+        if(isset($elements)){
+            $userControler->account($elements);
+        }else{
+            $userControler->account();
+        }
+        
+        // require("view/account.php");
     }, 'account');
 
     $router->map('GET', '/user/my-account', function(){
@@ -101,6 +109,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     $router->map('GET', '/user/logOut', function(){$userControler = new UserControler;$userControler->logOut();}, 'deconnexion');
 
     $router->map('POST', '/user/insertUser', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements['email'] = htmlspecialchars($_POST['email']);
         $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
@@ -110,6 +123,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     });
 
     $router->map('POST', '/user/connection', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
         $elements['password'] = htmlspecialchars($_POST['password']);
@@ -117,6 +135,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     });
 
     $router->map('POST', '/user/updateUserInformation', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements['first_name'] = htmlspecialchars($_POST['first_name']);
         $elements['last_name'] = htmlspecialchars($_POST['last_name']);
@@ -126,6 +149,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     });
 
     $router->map('POST','/user/updatePassword', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements['lastPassword'] = htmlspecialchars($_POST['lastPassword']);
         $elements['password1'] = htmlspecialchars($_POST['password1']);
@@ -169,6 +197,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     }, 'contact');
 
     $router->map('POST', '/sendMailContact', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements["email"] = htmlspecialchars($_POST['contact_email']);
         $elements["first&last_name"] = htmlspecialchars($_POST['first&last_name']);
@@ -198,6 +231,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
         
     });
     $router->map('POST', '/insertComment/[i:id]', function($id){ // Insertion d'un commentaire
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $postControler = new PostControler();
         $elements['idPost'] = $id; 
         $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
@@ -226,6 +264,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
         });
 
         $router->map('POST', '/insertPost', function(){ // Insertion d'un article
+            if(!isset($_POST['token'])){
+                Security::controleToken();
+            }else{
+                Security::controleToken(htmlspecialchars($_POST['token']));
+            }
             $postControler = new PostControler;
             $statusPost = true;
             if( isset($_POST['draft']) ){ //Obligation de laisser cette condition pour savoir si l'article doit être un brouillon ou pas. Utilisation de isset pour savoir. 
@@ -239,6 +282,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $postControler->insertPost($elements);
         });
         $router->map('GET', '/updatePost/[i:id]', function($id){ // Page update d'un article
+            
             $postControler = new PostControler;
             $elements['id'] = $id;
             if(isset($_SESSION['info'])){
@@ -258,6 +302,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
             }
         });
         $router->map('POST', '/insertUpdatePost', function(){ // Insertion de l'update d'un article
+            if(!isset($_POST['token'])){
+                Security::controleToken();
+            }else{
+                Security::controleToken(htmlspecialchars($_POST['token']));
+            }
             $postControler = new PostControler;
             $statusPost = true;
             if( isset($_POST['draft']) ){ //Obligation de laisser cette condition pour savoir si l'article doit être un brouillon ou pas. Utilisation de isset pour savoir. 
@@ -266,7 +315,12 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $postControler->insertUpdatePost(htmlspecialchars($_POST['titlePost']), htmlspecialchars($_POST['shortDescription']), $_POST['content'], $_POST['id_post'], $statusPost);
         });
 
-        $router->map('GET', '/deletePost/[i:id]', function($id){
+        $router->map('POST', '/deletePost/[i:id]', function($id){
+            if(!isset($_POST['token'])){
+                Security::controleToken();
+            }else{
+                Security::controleToken(htmlspecialchars($_POST['token']));
+            }
             $postControler = new PostControler;
             $postControler->deletePost($id);
         });

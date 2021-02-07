@@ -1,34 +1,39 @@
 <?php
 namespace App\utile;
 
-class Token{
+class Security{
 
     public static function generateToken($nom = ''){
         $token = uniqid(rand(), true);
         $_SESSION[$nom.'_token'] = $token;
         $_SESSION[$nom.'_tokenTime'] = time();
-        // echo $token;
         return $token;
     }
 
-    public static function controleToken($userToken){
+    public static function controleToken($userToken = null){
         if( isset($_SESSION['_token']) && isset($_SESSION['_tokenTime']) && isset($userToken) ){
             if($_SESSION['_token'] === $userToken){
                 $time = time();
                 if($time > $_SESSION['_tokenTime'] && $time <= $_SESSION['_tokenTime'] + (15*60)){
-                    return true;
+                    unset($_SESSION['_token']);
+                    unset($_SESSION['_tokenTime']);
+                    return;
                 }else{
                     session_destroy();
-                    return false;
+                    header('Location: /#secu');
+                    exit;
                 }
             }else{
                 session_destroy();
-                return false;
+                header('Location: /#secu');
+                exit;
+
             }
 
         }else{
             session_destroy();
-            return false;
+            header('Location: /#secu');
+            exit;
         }
     }
 

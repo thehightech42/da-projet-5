@@ -47,6 +47,7 @@ ob_start();
                         <label for="comment">Votre commentaire :</label>
                         <input type="text" name="comment" class="input form-control" placeholder="Votre commentaire" required>
                     </div>
+                    <input type="hidden" name="token" value="<?= $this->_token ?>">
                     <button type="submit" class="btn btn-dark">Publier</button><?php if(isset($elements['info'])){echo '<p>'.$elements['info'].'</p>';}?>
                 </div>
             </form>
