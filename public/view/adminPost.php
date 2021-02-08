@@ -16,7 +16,7 @@ ob_start();
                     echo '<p>'.$elements['infoModfication'].'</p>';
                 }
                 ?>
-                <table class="table table-dark">
+                <table class="table table-dark over-scroll">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
