@@ -24,13 +24,18 @@ class PostControler{
                 header('Location: /admin/posts');
             }
         }else{
-            $insertPostPublish = $this->_postModel->insertPostPublish( $elements['titlePost'], $elements['shortDescription'], $elements['content']);
-            if(!$insertPostPublish){
+            if($element['shortDescription'] === ""){
                 $this->returnPagePost($elements, '/createPost');
             }else{
-                // Envoyer vers l'article publié
-                header('Location: /');
+                $insertPostPublish = $this->_postModel->insertPostPublish( $elements['titlePost'], $elements['shortDescription'], $elements['content']);
+                if(!$insertPostPublish){
+                    $this->returnPagePost($elements, '/createPost');
+                }else{
+                    // Envoyer vers l'article publié
+                    header('Location: /');
+                }
             }
+            
         }
 
     }
@@ -122,28 +127,33 @@ class PostControler{
                 $this->returnPagePost($elements, '/updatePost/'.$id.'');
             }
         }else{ // Publication de la mise à jour
-            $tryPublicationDate = $this->_postModel->tryPublicationDate($id);
-            if($tryPublicationDate){ // Ajout d'une last_update - Mise à jours
-                $insertUpdatePostPublishSecond = $this->_postModel->insertUpdatePostPublishSecond($title, $shortDescription, $content, $id);
-                if($insertUpdatePostPublishSecond){
-                    unset($elements);
-                    $elements['info'] = "Votre article a bien été mis à jours";
-                    $this->returnPagePost($elements, '/post/'.$id.'');
-                }else{
-                    $elements['info'] = "Un echec lors de la mise à jours a été détecté. Merci de réessayer ou de contacter l'administrateur.";
-                    $this->returnPagePost($elements, '/updatePost/'.$id.'');
-                }
-            }else{ // Ajout de la date de publication - Première publication
-                $insertUpdatePostPublishFirst = $this->_postModel->insertUpdatePostPublishFirst($title, $shortDescription, $content, $id);
-                if($insertUpdatePostPublishFirst){
-                    unset($elements);
-                    $elements['info'] = "Votre article a bien été publié";
-                    $this->returnPagePost($elements, '/post/'.$id.'');
-                }else{
-                    $elements['info'] = "Un echec lors de la mise à jours a été détecté. Merci de réessayer ou de contacter l'administrateur.";
-                    $this->returnPagePost($elements, '/updatePost/'.$id.'');
+            if($elements['shortDescription'] === ""){
+                $this->returnPagePost($elements, '/updatePost/'.$id.'');
+            }else{
+                $tryPublicationDate = $this->_postModel->tryPublicationDate($id);
+                if($tryPublicationDate){ // Ajout d'une last_update - Mise à jours
+                    $insertUpdatePostPublishSecond = $this->_postModel->insertUpdatePostPublishSecond($title, $shortDescription, $content, $id);
+                    if($insertUpdatePostPublishSecond){
+                        unset($elements);
+                        $elements['info'] = "Votre article a bien été mis à jours";
+                        $this->returnPagePost($elements, '/post/'.$id.'');
+                    }else{
+                        $elements['info'] = "Un echec lors de la mise à jours a été détecté. Merci de réessayer ou de contacter l'administrateur.";
+                        $this->returnPagePost($elements, '/updatePost/'.$id.'');
+                    }
+                }else{ // Ajout de la date de publication - Première publication
+                    $insertUpdatePostPublishFirst = $this->_postModel->insertUpdatePostPublishFirst($title, $shortDescription, $content, $id);
+                    if($insertUpdatePostPublishFirst){
+                        unset($elements);
+                        $elements['info'] = "Votre article a bien été publié";
+                        $this->returnPagePost($elements, '/post/'.$id.'');
+                    }else{
+                        $elements['info'] = "Un echec lors de la mise à jours a été détecté. Merci de réessayer ou de contacter l'administrateur.";
+                        $this->returnPagePost($elements, '/updatePost/'.$id.'');
+                    }
                 }
             }
+            
         }
     }
 
