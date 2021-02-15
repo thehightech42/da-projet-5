@@ -42,7 +42,7 @@ class UserControler{
                 $_SESSION['pseudo'] = $elements['pseudo'];
             }
         }
-        header('Location: /account');
+        header('Location: /user/account');
     }
 
     public function connection($elements){
@@ -105,24 +105,24 @@ class UserControler{
     }
 
     public function updateUserInformation($elements){
-        echo "Test1";
+        // echo "Test1";
         $arrayCheckUniqueInformation = $this->checkUniqueInformation($elements['pseudo'], $elements['email']);
         if($arrayCheckUniqueInformation['pseudo'] && $arrayCheckUniqueInformation['email']){
             $updateUserInformation = $this->_userModel->updateUserInformation($elements['first_name'], $elements['last_name'], $elements['email'], $elements['pseudo']); 
             if($updateUserInformation === false){
-                echo "Test2";
+                // echo "Test2";
                 $_SESSION['info']['userGet'] = "Une erreur c'est produit dans l'enregistrement de la mise à jours de vos informations. Merci de contacter l'administrateur.";
             }else{
-                echo "Test3";
+                // echo "Test3";
                 $_SESSION['info']['userGet'] = "Vos modifications ont bien été enregistré."; 
                 $userInformation = $this->_userModel->selectUserInfo();
             }
         }else{
             if($arrayCheckUniqueInformation['pseudo'] === false){
-                echo "Test4";
+                // echo "Test4";
                 $_SESSION['info']['userGet'] = "Le pseudo choisi est déjà utilisé par un autre utilisateur. Merci d'en choisir un autre.";
             }else{
-                echo "Test5";
+                // echo "Test5";
                 $_SESSION['info']['userGet'] = "L'email choisi est déja utilisé par un autre utilisateur. Merci d'en choisir un autre.";
             }
         }
