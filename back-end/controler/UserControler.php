@@ -110,19 +110,16 @@ class UserControler{
         if($arrayCheckUniqueInformation['pseudo'] && $arrayCheckUniqueInformation['email']){
             $updateUserInformation = $this->_userModel->updateUserInformation($elements['first_name'], $elements['last_name'], $elements['email'], $elements['pseudo']); 
             if($updateUserInformation === false){
-                // echo "Test2";
                 $_SESSION['info']['userGet'] = "Une erreur c'est produit dans l'enregistrement de la mise à jours de vos informations. Merci de contacter l'administrateur.";
             }else{
-                // echo "Test3";
                 $_SESSION['info']['userGet'] = "Vos modifications ont bien été enregistré."; 
-                $userInformation = $this->_userModel->selectUserInfo();
+                $_SESSION['pseudo'] = $elements['pseudo'];
+                $_SESSION['email'] = $elements['email'];
             }
         }else{
             if($arrayCheckUniqueInformation['pseudo'] === false){
-                // echo "Test4";
                 $_SESSION['info']['userGet'] = "Le pseudo choisi est déjà utilisé par un autre utilisateur. Merci d'en choisir un autre.";
             }else{
-                // echo "Test5";
                 $_SESSION['info']['userGet'] = "L'email choisi est déja utilisé par un autre utilisateur. Merci d'en choisir un autre.";
             }
         }
