@@ -276,7 +276,7 @@ if(!Maintenance(true, $ipAccepted)){}else{
                 $statusPost = false;
             };
             $elements['titlePost'] = htmlspecialchars($_POST['titlePost']);
-            $elements['shortDesciptions'] = htmlspecialchars($_POST['shortDescription']);
+            $elements['shortDescription'] = htmlspecialchars($_POST['shortDescription']);
             $elements['content'] = $_POST['content'];
             $elements['statusPost'] = $statusPost;
 

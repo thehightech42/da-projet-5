@@ -53,17 +53,6 @@ class Security{
             header('Location: /#secu');
             exit; 
         }
-        // if($_SESSION['_ipUser'] !== $_SERVER['REMOTE_ADDR']){
-        //     session_destroy();
-        //     header('Location: /#secu');
-        //     exit;
-        // }
-        // if($_SESSION['_lastConnextion'] + (60*60) < time() ){
-        //     session_destroy();
-        //     header('Location: /#secu');
-        //     exit;
-        // }
-        // return;
     }
 
 }
