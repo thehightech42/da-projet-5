@@ -258,8 +258,8 @@ class PostControler{
                 }
                 array_push($posts, $post);
             }
-            require('view/adminPost.php');
-        }   
+        }
+        require('view/adminPost.php');   
     }
 
     public function deletePost($id){
