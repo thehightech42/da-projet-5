@@ -4,20 +4,22 @@ $titlePage = "Modération des commentaire";
 ob_start();
 ?>
     <div class="row justify-content-center">
-        <div class="col-lg-10"><h5>Modération des commentaires</h5> </div>
+        <!-- <div class="col-lg-10"> </div>
         <div class="col-lg-10">
-            <p>Avant qu'un commetaire soit affiché publiquement, il doit être validée par vous ainsi que l'ensemble des modérateurs bénévoles de ce site. <br>
-            Le but n'est pas de supprimer les commentaires négatif mais de retirer les commentaires injurieux, dégrant, ... 
-            Un commentaire négatif mais expliqué poliment et argumenté doit être publié !</p>
-        </div>
+            
+        </div> -->
 
         <div class="col-lg-10">
+            <h5>Modération des commentaires</h5>
+            <p>Avant qu'un commentaire soit affiché publiquement, il doit être validé par vous ainsi que l'ensemble des modérateurs bénévoles de ce site.<br>
+            Le but n'est pas de supprimer les commentaires négatifs mais de retirer les commentaires injurieux, dégradants, ...
+            Un commentaire négatif expliqué poliment et argumenté doit être publié !</p>
             <?php
                 if(isset($elements['infoModification'])){
                     echo '<p>'.$elements['infoModification'].'</p>';
                 }
                 ?>
-                <table class="table table-dark">
+                <table class="table table-dark over-scroll">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

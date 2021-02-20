@@ -7,7 +7,7 @@ ob_start();
 <div class="row justify-content-center">
         <div class="col-lg-10"><h5>Article</h5> </div>
         <div class="col-lg-10">
-            <p>Voici un tableau récapitulatif de l'ensemble des articles du publié sur le site.</p>
+            <p>Voici le récapitulatif des articles publiés ou en attente de publication sur le site.</p>
         </div>
 
         <div class="col-lg-10">
@@ -16,7 +16,7 @@ ob_start();
                     echo '<p>'.$elements['infoModfication'].'</p>';
                 }
                 ?>
-                <table class="table table-dark">
+                <table class="table table-dark over-scroll">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -36,12 +36,17 @@ ob_start();
                                 ?>
                                 <tr>
                                     <th scope="row"><?= $i ?></th>
-                                    <td><a href="/post/<?= $post['id'] ?>"><?= $post['title'] ?></a></td>
+                                    <td><?php if($post['status'] === "Brouillon"){
+                                        ?><a href="/updatePost/<?= $post['id'] ?>"><?= $post['title'] ?><?php
+                                            }else{
+                                            ?><a href="/post/<?= $post['id'] ?>"><?= $post['title'] ?></a><?php
+                                        }?>
+                                    </td>
                                     <td><?= $post['pseudo'] ?></td>
                                     <td><?= $post['status'] ?></td>
                                     <td><?= $post['publicationDate'] ?></td>
                                     <td><a href="/updatePost/<?= $post['id'] ?>"><i class="far fa-edit"></i></a></td>
-                                    <td><a href="/deletePost/<?= $post['id'] ?>"><i class="far fa-trash-alt"></i></a></td>
+                                    <td><form action="/deletePost/<?= $post['id'] ?>" method="POST"><input type="hidden" name="token" value="<?= $this->_token ?>"><button class="buttonAdminListPost"type="submit"><i class="far fa-trash-alt"></i></button></form></td>
                                 </tr>
                             <?php
                             $i++;

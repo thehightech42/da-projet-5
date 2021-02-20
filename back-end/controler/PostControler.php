@@ -2,11 +2,13 @@
 namespace App\controler;
 use App\model\PostModel;
 use App\model\UserModel;
+use App\utile\Security;
 
 class PostControler{
 
     function __construct(){
         $this->_postModel = new PostModel;
+        $this->_token = Security::generateToken();
     }
 
     public function createPost(){
@@ -22,21 +24,27 @@ class PostControler{
                 header('Location: /admin/posts');
             }
         }else{
-            $insertPostPublish = $this->_postModel->insertPostPublish( $elements['titlePost'], $elements['shortDescription'], $elements['content']);
-            if(!$insertPostPublish){
+            if($element['shortDescription'] === ""){
                 $this->returnPagePost($elements, '/createPost');
             }else{
-                // Envoyer vers l'article publié
-                header('Location: /');
+                $insertPostPublish = $this->_postModel->insertPostPublish( $elements['titlePost'], $elements['shortDescription'], $elements['content']);
+                if(!$insertPostPublish){
+                    $this->returnPagePost($elements, '/createPost');
+                }else{
+                    // Envoyer vers l'article publié
+                    header('Location: /');
+                }
             }
+            
         }
 
     }
 
     public function postsList(){
-        $posts = $this->_postModel->postsList(); 
+        $posts = $this->_postModel->postsList();
+        // var_dump($posts[0][0]);
         if($posts === false){
-            $elements['info'] = "Aucun article de publié. Merci de revenir plus tard ou de contacter l'admnistrateur si le problème perssiste.";
+            $elements['info'] = "Aucun article de publié. Merci de revenir plus tard ou de contacter l'admnistrateur si le problème persiste.";
         }
         require('view/postsList.php');
 
@@ -120,28 +128,33 @@ class PostControler{
                 $this->returnPagePost($elements, '/updatePost/'.$id.'');
             }
         }else{ // Publication de la mise à jour
-            $tryPublicationDate = $this->_postModel->tryPublicationDate($id);
-            if($tryPublicationDate){ // Ajout d'une last_update - Mise à jours
-                $insertUpdatePostPublishSecond = $this->_postModel->insertUpdatePostPublishSecond($title, $shortDescription, $content, $id);
-                if($insertUpdatePostPublishSecond){
-                    unset($elements);
-                    $elements['info'] = "Votre article a bien été mis à jours";
-                    $this->returnPagePost($elements, '/post/'.$id.'');
-                }else{
-                    $elements['info'] = "Un echec lors de la mise à jours a été détecté. Merci de réessayer ou de contacter l'administrateur.";
-                    $this->returnPagePost($elements, '/updatePost/'.$id.'');
-                }
-            }else{ // Ajout de la date de publication - Première publication
-                $insertUpdatePostPublishFirst = $this->_postModel->insertUpdatePostPublishFirst($title, $shortDescription, $content, $id);
-                if($insertUpdatePostPublishFirst){
-                    unset($elements);
-                    $elements['info'] = "Votre article a bien été publié";
-                    $this->returnPagePost($elements, '/post/'.$id.'');
-                }else{
-                    $elements['info'] = "Un echec lors de la mise à jours a été détecté. Merci de réessayer ou de contacter l'administrateur.";
-                    $this->returnPagePost($elements, '/updatePost/'.$id.'');
+            if($elements['shortDescription'] === ""){
+                $this->returnPagePost($elements, '/updatePost/'.$id.'');
+            }else{
+                $tryPublicationDate = $this->_postModel->tryPublicationDate($id);
+                if($tryPublicationDate){ // Ajout d'une last_update - Mise à jours
+                    $insertUpdatePostPublishSecond = $this->_postModel->insertUpdatePostPublishSecond($title, $shortDescription, $content, $id);
+                    if($insertUpdatePostPublishSecond){
+                        unset($elements);
+                        $elements['info'] = "Votre article a bien été mis à jours";
+                        $this->returnPagePost($elements, '/post/'.$id.'');
+                    }else{
+                        $elements['info'] = "Un echec lors de la mise à jours a été détecté. Merci de réessayer ou de contacter l'administrateur.";
+                        $this->returnPagePost($elements, '/updatePost/'.$id.'');
+                    }
+                }else{ // Ajout de la date de publication - Première publication
+                    $insertUpdatePostPublishFirst = $this->_postModel->insertUpdatePostPublishFirst($title, $shortDescription, $content, $id);
+                    if($insertUpdatePostPublishFirst){
+                        unset($elements);
+                        $elements['info'] = "Votre article a bien été publié";
+                        $this->returnPagePost($elements, '/post/'.$id.'');
+                    }else{
+                        $elements['info'] = "Un echec lors de la mise à jours a été détecté. Merci de réessayer ou de contacter l'administrateur.";
+                        $this->returnPagePost($elements, '/updatePost/'.$id.'');
+                    }
                 }
             }
+            
         }
     }
 
@@ -246,8 +259,8 @@ class PostControler{
                 }
                 array_push($posts, $post);
             }
-            require('view/adminPost.php');
-        }   
+        }
+        require('view/adminPost.php');   
     }
 
     public function deletePost($id){

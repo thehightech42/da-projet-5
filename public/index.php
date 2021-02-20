@@ -11,6 +11,7 @@ require "../gestionAcces.php";
 use \App\controler\UserControler; 
 use \App\controler\PostControler; 
 use \App\controler\AdminControler;
+use \App\utile\Security;
 // phpinfo();
 
 /**
@@ -30,16 +31,43 @@ function Maintenance($activation, $ipAccepted){
         return true;
     }
 }
+Security::checkSession();
 
 $router = new AltoRouter();
 if(!Maintenance(true, $ipAccepted)){}else{
     
-    $router->map('GET', '/', function(){ require("view/home.php");} , 'home');
+    $router->map('GET', '/', function(){if(isset($_SESSION['infoContactUser'])){
+        if(isset($_SESSION['infoContactUser']['email'])){
+            $elements["email"] = $_SESSION['infoContactUser']['email'];
+            unset($_SESSION['infoContactUser']['email']);
+        }
+        if(isset($_SESSION['infoContactUser']['name'])){
+            $elements["first&last_name"] = $_SESSION['infoContactUser']['name'];
+            unset($_SESSION['infoContactUser']['name']);
+        }
+        if(isset($_SESSION['infoContactUser']['content'])){
+            $elements["content_message"] =  $_SESSION['infoContactUser']['content'];
+            unset($_SESSION['infoContactUser']['content']);
+        }
+        if(isset($_SESSION['infoContact'])){
+            $elements["info"] = $_SESSION['infoContact'];
+            unset($_SESSION['infoContact']);
+        }
+    }else if(isset($_SESSION['infoContact']) && !isset($_SESSION['infoContactUser'])){
+        if(isset($_SESSION['infoContact'])){
+            $elements["info"] = $_SESSION['infoContact'];
+            unset($_SESSION['infoContact']);
+        }
+    }
+        // var_dump($elements);
+        require("view/home.php");
+    } , 'home');
 
     /**
      * Parti utilisateur
      */
     $router->map('GET', '/user/account', function(){
+        $userControler = new UserControler;
         $elements = [];
         if(isset($_SESSION['info'])){
             $elements['info'] = $_SESSION['info'];
@@ -53,7 +81,13 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $elements['pseudo'] = $_SESSION['pseudo'];
             unset($_SESSION['pseudo']);
         }
-        require("view/account.php");
+        if(isset($elements)){
+            $userControler->account($elements);
+        }else{
+            $userControler->account();
+        }
+        
+        // require("view/account.php");
     }, 'account');
 
     $router->map('GET', '/user/my-account', function(){
@@ -76,6 +110,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     $router->map('GET', '/user/logOut', function(){$userControler = new UserControler;$userControler->logOut();}, 'deconnexion');
 
     $router->map('POST', '/user/insertUser', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements['email'] = htmlspecialchars($_POST['email']);
         $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
@@ -85,6 +124,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     });
 
     $router->map('POST', '/user/connection', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
         $elements['password'] = htmlspecialchars($_POST['password']);
@@ -92,6 +136,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     });
 
     $router->map('POST', '/user/updateUserInformation', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements['first_name'] = htmlspecialchars($_POST['first_name']);
         $elements['last_name'] = htmlspecialchars($_POST['last_name']);
@@ -101,6 +150,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
     });
 
     $router->map('POST','/user/updatePassword', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
         $elements['lastPassword'] = htmlspecialchars($_POST['lastPassword']);
         $elements['password1'] = htmlspecialchars($_POST['password1']);
@@ -112,13 +166,52 @@ if(!Maintenance(true, $ipAccepted)){}else{
     //Contact
     $router->map('GET', '/contact', function(){
     $userControler = new UserControler;
-    $userControler->contact();
+    $elements = [];
+    if(isset($_SESSION['infoContactUser'])){
+        if(isset($_SESSION['infoContactUser']['email'])){
+            $elements["email"] = $_SESSION['infoContactUser']['email'];
+            unset($_SESSION['infoContactUser']['email']);
+        }
+        if(isset($_SESSION['infoContactUser']['name'])){
+            $elements["first&last_name"] = $_SESSION['infoContactUser']['name'];
+            unset($_SESSION['infoContactUser']['name']);
+        }
+        if(isset($_SESSION['infoContactUser']['content'])){
+            $elements["content_message"] =  $_SESSION['infoContactUser']['content'];
+            unset($_SESSION['infoContactUser']['content']);
+        }
+        if(isset($_SESSION['infoContact'])){
+            $elements["info"] = $_SESSION['infoContact'];
+            unset($_SESSION['infoContact']);
+        }
+        $userControler->contact($elements);
+    }else if(isset($_SESSION['infoContact']) && !isset($_SESSION['infoContactUser'])){
+        if(isset($_SESSION['infoContact'])){
+            $elements["info"] = $_SESSION['infoContact'];
+            unset($_SESSION['infoContact']);
+        }
+        $userControler->contact($elements);
+    }else{
+        $userControler->contact();
+        }
+        // var_dump($elements);
     }, 'contact');
+
     $router->map('POST', '/sendMailContact', function(){
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $userControler = new UserControler;
-        $userControler->sendMailContact( htmlspecialchars($_POST['first&last_name']),
-        htmlspecialchars($_POST['contact_email']),
-        htmlspecialchars($_POST['content_message']));
+        $elements["email"] = htmlspecialchars($_POST['contact_email']);
+        $elements["first&last_name"] = htmlspecialchars($_POST['first&last_name']);
+        $elements["content_message"] = htmlspecialchars($_POST['content_message']);
+        $elements["info"] = $_SESSION['infoContact'];
+        if(isset($_POST["formHome"])){
+            $elements["home"] = htmlspecialchars($_POST["formHome"]);
+        };
+        $userControler->sendMailContact($elements);
     });
 
 
@@ -139,6 +232,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
         
     });
     $router->map('POST', '/insertComment/[i:id]', function($id){ // Insertion d'un commentaire
+        if(!isset($_POST['token'])){
+            Security::controleToken();
+        }else{
+            Security::controleToken(htmlspecialchars($_POST['token']));
+        }
         $postControler = new PostControler();
         $elements['idPost'] = $id; 
         $elements['pseudo'] = htmlspecialchars($_POST['pseudo']);
@@ -167,19 +265,25 @@ if(!Maintenance(true, $ipAccepted)){}else{
         });
 
         $router->map('POST', '/insertPost', function(){ // Insertion d'un article
+            if(!isset($_POST['token'])){
+                Security::controleToken();
+            }else{
+                Security::controleToken(htmlspecialchars($_POST['token']));
+            }
             $postControler = new PostControler;
             $statusPost = true;
             if( isset($_POST['draft']) ){ //Obligation de laisser cette condition pour savoir si l'article doit être un brouillon ou pas. Utilisation de isset pour savoir. 
                 $statusPost = false;
             };
             $elements['titlePost'] = htmlspecialchars($_POST['titlePost']);
-            $elements['shortDesciptions'] = htmlspecialchars($_POST['shortDescription']);
+            $elements['shortDescription'] = htmlspecialchars($_POST['shortDescription']);
             $elements['content'] = $_POST['content'];
             $elements['statusPost'] = $statusPost;
 
             $postControler->insertPost($elements);
         });
         $router->map('GET', '/updatePost/[i:id]', function($id){ // Page update d'un article
+            
             $postControler = new PostControler;
             $elements['id'] = $id;
             if(isset($_SESSION['info'])){
@@ -199,6 +303,11 @@ if(!Maintenance(true, $ipAccepted)){}else{
             }
         });
         $router->map('POST', '/insertUpdatePost', function(){ // Insertion de l'update d'un article
+            if(!isset($_POST['token'])){
+                Security::controleToken();
+            }else{
+                Security::controleToken(htmlspecialchars($_POST['token']));
+            }
             $postControler = new PostControler;
             $statusPost = true;
             if( isset($_POST['draft']) ){ //Obligation de laisser cette condition pour savoir si l'article doit être un brouillon ou pas. Utilisation de isset pour savoir. 
@@ -207,7 +316,12 @@ if(!Maintenance(true, $ipAccepted)){}else{
             $postControler->insertUpdatePost(htmlspecialchars($_POST['titlePost']), htmlspecialchars($_POST['shortDescription']), $_POST['content'], $_POST['id_post'], $statusPost);
         });
 
-        $router->map('GET', '/deletePost/[i:id]', function($id){
+        $router->map('POST', '/deletePost/[i:id]', function($id){
+            if(!isset($_POST['token'])){
+                Security::controleToken();
+            }else{
+                Security::controleToken(htmlspecialchars($_POST['token']));
+            }
             $postControler = new PostControler;
             $postControler->deletePost($id);
         });
@@ -253,12 +367,21 @@ if(!Maintenance(true, $ipAccepted)){}else{
     } 
     //End admin
 
-
     $match = $router->match();
-    if( is_array($match) && is_callable( $match['target']) ) {
-        call_user_func_array( $match['target'], $match['params'] ); 
-    } else {
-        // header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+
+    if(is_array($match['params']) || is_object($match['params'])){
+        $params = [];
+        foreach($match['params'] as $param){
+            array_push($params, htmlspecialchars($param)); 
+        }
+        if( is_array($match) && is_callable( $match['target']) ) {
+            call_user_func_array( $match['target'], $params );
+        } else {
+            // header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+            require('view/404.php');
+        }
+
+    }else{
         require('view/404.php');
     }
 }

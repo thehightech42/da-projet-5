@@ -45,6 +45,7 @@ ob_start();
                     }
                     ?></textarea>
                 </div>
+                <input type="hidden" name="token" value="<?= $this->_token ?>">
                 
                 <div class="row mt-5 justify-content-between">
                     <div class="col-lg-3">

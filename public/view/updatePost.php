@@ -40,6 +40,7 @@ ob_start();
                         <input type="submit" name="draft" class="btn btn-outline-secondary" value="Sauvegarder en brouillon">
                     </div>
                 </div>
+                <input type="hidden" name="token" value="<?= $this->_token ?>">
                 <input type="text" name="id_post" style="display:none;" readonly value="<?= $elements['id'] ?>">
                 
             </form>

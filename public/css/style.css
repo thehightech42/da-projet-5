@@ -2,7 +2,9 @@
 /* h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: Roboto, Nunito;
 } */
-
+.infoSendEmail{
+    color: #FFFFFF;
+}
 a.nav-link{
     /* font-family: Nunito !important; */
     font-size: 1.05em !important;
@@ -18,7 +20,7 @@ input.form-control, textarea, input.form-control:focus, textarea:focus textarea.
     color: #d1cccc !important;
 }
 
-/* Header - Barre de navigatetion */
+/* Header - Barre de navigatation */
  .nav_perso{
     background-color: #212529 !important;
     /* display: none; */
@@ -30,6 +32,52 @@ nav.navbar:not(.nav_perso){
 /* Barre d'administration */
 #navAdmin{
     background-color : #212529;
+    margin-bottom: -5%;
+}
+@media screen and (max-width: 949px){
+    #content.other_home{
+        margin-top: 70px;
+        min-height: 92vh !important;
+    } 
+    .navAdmin{
+        padding-left: 10px;
+        display: flex;
+        overflow: scroll;
+    }
+    .navAdmin ol{
+        min-width: 150px;
+        padding: 0% 3%;
+    }
+    #navAdmin{
+        background-color : #212529;
+        margin-bottom: 0%;
+    }
+    #content.other_home{
+        margin-top: 70px !important;
+    }
+
+    #contactForm .row .col-md-6 .form-group{
+        margin-top: 1rem !important;
+    }
+}
+@media screen and (max-width: 1100px){
+    .rowNavHadmin {
+        min-height: 86vh !important;
+    }
+}
+
+@media screen and (max-width: 780px){
+    .navAdmin ol{
+        min-width: 150px;
+        padding: 0% 3%;
+    }
+    #content.other_home{
+        margin-top: 70px;
+        min-height: 75vh !important;
+    }
+    .rowNavHadmin{
+        min-height: 50vh !important;
+    }
 }
 
 ol a.admin{
@@ -53,14 +101,11 @@ ol{
 }
 
 #content.other_home{
-    padding-top:80px;
-    min-height: 88vh !important;
+    margin-top: 90px;
+    min-height: 80vh !important;
 } 
 
 /* Page de contact */
-section#contactContainer{
-    height:80vh;
-}
 form#contactForm .row .col-md-6 .form-group-textarea{
     height: 100% !important;
 }
@@ -72,11 +117,11 @@ textarea.form-control{
 }
 
 #contactForm .row .col-md-6 .form-group:nth-child(2){
-    margin-top: 3rem !important;
+    margin-top: 3rem;
 }
 
 /* Footer */
-footer{
+footer:not(.blockquote-footer){
     background-color: #212529;
     /* position: absolute;  */
     bottom:0;
@@ -92,3 +137,27 @@ footer{
 svg .fa-2x{
     color:grey !important;
 }
+
+/* Suppression margin contact */
+.form-group.margin-hidden{
+    margin-bottom: 0 !important;
+}
+
+/* Admin List Post */
+button.buttonAdminListPost{
+    background-color: rgba(0,0,0,0);
+    border: none;
+    color: #fed136;
+}
+button.buttonAdminListPost:hover{
+    color: #e6b301;
+}
+
+/* Table media query */
+
+@media only screen and (max-width: 1000px) {
+    table.over-scroll{
+        overflow: scroll !important;
+        display: inline-block;
+    }
+  }

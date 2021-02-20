@@ -47,6 +47,7 @@ ob_start();
                         }
                     ?>" required>
                 </div>
+                <input type="hidden" name="token" value="<?= $this->_token ?>">
                 <input type="submit" class="btn btn-dark" name="submit" value="Enregistrer les modifications">
             </form>
             <p><?php if(isset($elements['info']['userGet']) ){echo $elements['info']['userGet'];}?></p>
@@ -67,7 +68,7 @@ ob_start();
                     <label for="password2">Confirmez votre nouveau mot de passe :</label>
                     <input type="password" id="inputPassword2"name="password2" class="input form-control" placeholder="Confirmez votre nouveau mot de passe">
                 </div>
-
+                <input type="hidden" name="token" value="<?= $this->_token ?>">
                 <input type="submit" class="btn btn-dark" name="submit" value="Changer votre mot de passe">
             </form>
                 <?php if(isset($elements['info']['password'])){echo $elements['info']['password'];}?>

@@ -4,7 +4,9 @@ $titlePage = "Dashboard";
 
 ob_start();
 ?>
-
+<div class="container">
+    
+</div>
 <div class="row justify-content-around mb-3">
     <div class="col-lg-12 mb-2"><h5>Information sur les articles :</h5></div>
 

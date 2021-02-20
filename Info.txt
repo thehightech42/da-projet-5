@@ -1,0 +1,48 @@
+// Fonction Rouing avec l'object router en param
+    function startRouring($router){
+        $match = $router->match();
+
+        if(is_array($match['params']) || is_object($match['params'])){
+            $params = [];
+            foreach($match['params'] as $param){
+                array_push($params, htmlspecialchars($param)); 
+            }
+            if( is_array($match) && is_callable( $match['target']) ) {
+                call_user_func_array( $match['target'], $params );
+            } else {
+                // header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+                require('view/404.php');
+            }
+    
+        }else{
+            require('view/404.php');
+        }
+    }
+    startRouring($router);
+
+
+    // Action en fonction de si on est une un formulaire post et controle du token
+    // if(isset($_SESSION['_token'])){
+    //     // echo "test1";
+    //     if(isset($_POST['token'])){
+    //         // echo "test2";
+    //         $validToken = Token::controleToken($_POST['token']);
+    //         if($validToken){
+    //             // echo "test3";
+    //             startRouring($router);
+    //         }else{
+    //             // echo "test4";
+    //             unset($_SESSION['_token']);
+    //             unset($_SESSION['_tokenTime']);
+    //             require('view/home.php');
+    //         }
+            
+    //     }else{
+    //         // echo "test5";
+    //         require('view/home.php');
+    //     }
+
+    // }else{
+    //     // echo "test6";
+    //     startRouring($router);
+    // }
