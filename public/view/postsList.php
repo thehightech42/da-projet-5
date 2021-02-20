@@ -12,6 +12,7 @@ ob_start();
                 echo '<h6>'.$elements['info'].'</h6>';
             }else{
                 foreach($posts as $post){
+                    // var_dump($post);
                     ?>
                     <div class="card mt-3 mb-3">
                         <div class="card-header">

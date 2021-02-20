@@ -29,7 +29,6 @@ class Security{
                 exit;
 
             }
-
         }else{
             session_destroy();
             header('Location: /#secu');

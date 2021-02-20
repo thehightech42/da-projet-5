@@ -34,7 +34,7 @@ class UserControler{
                 $_SESSION['pseudo'] = $elements['pseudo'];
             }
         }else{
-            $_SESSION['info']['registration'] = "Les informations fourni, ne nous permette pas de vous inscrire. Votre pseudo et adresse mail doivent être unique à chaque utilisateur. Et votre mot de passe dois être identique.";
+            $_SESSION['info']['registration'] = "Les informations fournies ne nous permettent pas de vous inscrire. Votre pseudo et adresse mail doivent être unique à chaque utilisateur. Et votre mot de passe dois être identique.";
             if($tryEmail === true){ 
                 $_SESSION['email'] = $elements['email'];
             }
@@ -54,7 +54,7 @@ class UserControler{
         }else{
             $findPassword = $this->_userModel->selectPasswordHash($findId);
             if($findPassword === false){
-                $_SESSION['info']['connection'] = "Une erreur c'est produite. Merci de contacter l'administrateur.";
+                $_SESSION['info']['connection'] = "Une erreur s'est produite. Merci de contacter l'administrateur.";
                 header('Location: /user/account', TRUE);
             }else{
                 $checkPassword = password_verify($elements['password'], $findPassword);
@@ -64,12 +64,12 @@ class UserControler{
                 }else{
                     $findEmail = $this->_userModel->selectEmail($findId);
                     if($findEmail === false){
-                        $_SESSION['info']['connection'] = "Une erreur c'est produite. Merci de contacter l'administrateur.";  
+                        $_SESSION['info']['connection'] = "Une erreur s'est produite. Merci de contacter l'administrateur.";  
                         header('Location: /user/account', TRUE);  
                     }else{
                         $userType = $this->_userModel->selectUserType($findId);
                         if($userType === false){
-                            $_SESSION['info']['connection'] = "Une erreur c'est produite. Merci de contacter l'administrateur.";
+                            $_SESSION['info']['connection'] = "Une erreur s'est produite. Merci de contacter l'administrateur.";
                             header('Location: /user/account', TRUE);
                         }else{
                             $_SESSION['pseudo'] = $elements['pseudo'];
@@ -93,7 +93,7 @@ class UserControler{
     public function myAccount($info = null){
         $elementsGet = $this->_userModel->selectUserInfo();
         if($elementsGet === false){
-            $elements['info']['userGet'] = "Une erreur c'est produite dans le chargement de vos informations. Merci de contacter l'administrateur du site.";
+            $elements['info']['userGet'] = "Une erreur s'est produite dans le chargement de vos informations. Merci de contacter l'administrateur du site.";
         }else{
             $elements['email'] = $elementsGet['email'];
             $elements['pseudo'] = $elementsGet['pseudo'];
@@ -110,9 +110,9 @@ class UserControler{
         if($arrayCheckUniqueInformation['pseudo'] && $arrayCheckUniqueInformation['email']){
             $updateUserInformation = $this->_userModel->updateUserInformation($elements['first_name'], $elements['last_name'], $elements['email'], $elements['pseudo']); 
             if($updateUserInformation === false){
-                $_SESSION['info']['userGet'] = "Une erreur c'est produit dans l'enregistrement de la mise à jours de vos informations. Merci de contacter l'administrateur.";
+                $_SESSION['info']['userGet'] = "Une erreur s'est produite dans l'enregistrement de la mise à jours de vos informations. Merci de contacter l'administrateur.";
             }else{
-                $_SESSION['info']['userGet'] = "Vos modifications ont bien été enregistré."; 
+                $_SESSION['info']['userGet'] = "Vos modifications ont bien été enregistrées."; 
                 $_SESSION['pseudo'] = $elements['pseudo'];
                 $_SESSION['email'] = $elements['email'];
             }
@@ -149,7 +149,7 @@ class UserControler{
             }else{
                 $updatePassword = $this->_userModel->updatePassword( password_hash($elements['password1'], PASSWORD_DEFAULT), $_SESSION['id_user']);
                 if(!$updatePassword){
-                    $_SESSION['info']['password'] = "Une erreur c'est produite lors de l'enregistrement de votre nouveau mot de passe. Merci de contacter l'administateur du site.";
+                    $_SESSION['info']['password'] = "Une erreur s'est produite lors de l'enregistrement de votre nouveau mot de passe. Merci de contacter l'administateur du site.";
                 }else{
                     $_SESSION['info']['password'] = 'Votre mot de passe a bien été changé !';
                 }
