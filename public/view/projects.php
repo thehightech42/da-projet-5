@@ -7,7 +7,8 @@ ob_start();
     <div class="container">
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Portfolio</h2>
-            <h3 class="section-subheading text-muted">Retrouvez ci dessous l'ensemble de mes réalisations</h3>
+            <h3 class="section-subheading text-muted mb-3">Retrouvez ci dessous l'ensemble de mes réalisations</h3>
+            <h3 class="section-subheading text-muted"><a class="section-subheading text-muted" href="doc/cv.pdf" target="_blank">Découvrez mon CV ici</a></h3>
         </div>
         <div>
             <h4 class="section-heading text-uppercase">Développeur D'Application Php/Symfony - Openclassrooms</h4>
