@@ -31,12 +31,7 @@ class PostModel extends Model{
             if($postsList === false || $postsList->rowcount() === 0){
                   return false;
             }else{
-                  if( $postsList->rowcount() === 1){
-                        return $postsList->fetch();
-                  }else{
-                        return $postsList->fetchAll();
-                  }
-                  
+                  return $postsList->fetchAll();
             }
       }
 

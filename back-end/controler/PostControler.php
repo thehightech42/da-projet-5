@@ -42,13 +42,10 @@ class PostControler{
 
     public function postsList(){
         $posts = $this->_postModel->postsList();
-        // var_dump($posts[0][0]);
         if($posts === false){
             $elements['info'] = "Aucun article de publié. Merci de revenir plus tard ou de contacter l'admnistrateur si le problème persiste.";
         }
         require('view/postsList.php');
-
-        
     }
 
     public function returnPagePost($elements, $road){
